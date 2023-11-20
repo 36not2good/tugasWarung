@@ -1,0 +1,55 @@
+/* navbar.css */
+
+/* Navbar Background Color */
+.navbar.bg-body-tertiary {
+    background-color: blue;
+  }
+  
+  /* Navbar Brand Text */
+  .navbar-brand {
+    color: white; /* Change the color as needed */
+    font-family: 'YourDesiredFont', sans-serif; /* Change the font as needed */
+  }
+  
+  /* Navbar Links Text */
+  .navbar-nav .nav-link {
+    color: white; /* Change the color as needed */
+    font-family: 'YourDesiredFont', sans-serif; /* Change the font as needed */
+  }
+  
+  /* Navbar Links Hover Effect */
+  .navbar-nav .nav-link:hover {
+    color: lightgray; /* Change the hover color as needed */
+  }
+  
+  /* Navbar Toggle Icon Color */
+  .navbar-toggler-icon {
+    background-color: white; /* Change the color as needed */
+  }
+  
+  /* Navbar Dropdown Background Color */
+  .navbar-nav .nav-item.dropdown:hover .dropdown-menu {
+    background-color: blue; /* Change the dropdown background color as needed */
+  }
+  
+  /* Navbar Dropdown Item Text Color */
+  .navbar-nav .nav-item.dropdown:hover .dropdown-menu .dropdown-item {
+    color: white; /* Change the dropdown item text color as needed */
+  }
+  
+  /* Navbar Dropdown Item Hover Effect */
+  .navbar-nav .nav-item.dropdown:hover .dropdown-menu .dropdown-item:hover {
+    background-color: lightgray; /* Change the hover background color as needed */
+    color: blue; /* Change the hover text color as needed */
+  }
+  
+  /* Align Navbar Text to the Right */
+  .navbar-nav {
+    margin-left: auto;
+  }
+  
+  /* Adjust Padding for Better Alignment */
+  .navbar-nav .nav-item {
+    padding-right: 10px; /* Adjust as needed */
+  }
+  
