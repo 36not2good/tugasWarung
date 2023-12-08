@@ -1,0 +1,252 @@
+.container {
+  display: flex;
+  height: auto;
+  width: 100%;
+  flex: 1;
+  position: relative;
+  cursor: default;
+}
+
+.food-list-wrapper{
+  display: flex;
+  flex-direction: column;
+}
+
+.food-list-wrapper h2{
+  font-weight: normal;
+  font-size: 2em;
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+
+.food-list {
+  display: flex;
+  flex-wrap: wrap;
+  padding-inline: 30px; /* Tambahkan properti ini */
+}
+
+
+.food-wrap{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  max-width: 100%;
+}
+
+.food-card {
+  border-radius: 5px;
+  transition: transform 0.3s ease;
+  margin: 10px;
+  cursor: pointer;
+  /* flex-direction: wrap; Mengatur tata letak menjadi kolom */
+  align-items: center;
+  /* width: 230px; */
+  width: 100%;
+  height: 190px;
+  box-shadow: 1px 2px 2px 2px #d9d9d9;
+  flex-basis: calc(25% - 20px);/* 33.33% - 20px untuk setiap food card */
+
+  /* Menetapkan flex-basis 100% untuk elemen ke-3 dan seterusnya */
+  .food-card:nth-child(n + 3) {
+    flex-basis: calc(100% - 20px);
+  }
+}
+
+.food-card:hover {
+  transform: scale(1.05); /* Perbesar kartu saat dihover */
+}
+
+.food-image-container {
+  position: relative; /* Membuat konten menjadi posisi relatif */
+  width: 100%;
+  height: 62%;
+  overflow: hidden;
+  border-radius: 5px;
+}
+
+.icon-info {
+  position: absolute; /* Menempatkan ikon di dalam elemen */
+  top: 10px; /* Sesuaikan dengan jarak dari atas */
+  right: 10px; /* Sesuaikan dengan jarak dari kanan */
+  color: #fff; /* Warna ikon */
+  z-index: 1; /* Pastikan ikon berada di atas gambar */
+  cursor: pointer;
+  width: 30px;
+  height: 30px;
+}
+
+
+.food-image {
+  width: 100%;
+  object-fit: cover;
+}
+
+.food-details {
+  width: 100%; /* Mengisi seluruh lebar container */
+  padding-top: 10px; /* Menambah ruang di atas detail makanan */
+  margin-left: 5px;
+  display: flex;
+  flex-direction: row;
+}
+
+.food-name{
+  display: flex;
+  flex-direction: column;
+  margin-right: 20px;
+}
+.food-details p{
+  font-size: 1em;
+  color: black;
+}
+
+.food-details h4{
+  margin: auto;
+}
+
+.payment-details {
+  display: flex;
+  flex-wrap: wrap;
+  /* width: auto; */
+  min-width: 350px;
+  margin-right: 10px;
+}
+
+.payment-details h2{
+  text-align: center;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-weight: normal;
+  font-size: 1.7em;
+}
+
+.selected-foods {
+  border-radius: 6px;
+  box-shadow: 1px 2px 2px 2px #d9d9d9;
+  height: 68vh;
+  color: #000000;
+  cursor: pointer;
+  margin-top: 20px
+}
+
+.selected-food{
+  margin-left: 10px;
+  margin-top: 20px;
+  display: flex;
+  flex-direction: row;
+  margin-right: 10px;
+}
+
+.selected-food:hover{
+  background-color: #FF6E40;
+  transition: all 0.5s;
+}
+
+.selected-food p{
+  color: #000000;
+  font-size: 1.3em;
+}
+
+.selected-food h5{
+  font-size: 1em;
+  margin-top: auto;
+  margin-left: auto;
+  margin-bottom: auto;
+}
+
+.total-price p{
+  margin-top: 5px;
+  font-size: 1.em;
+  font-weight: normal;
+}
+
+.pay-button{
+  background-color: #FF6E40;
+  width: auto;
+  height: 5vh;
+  margin-top: 15px;
+  border-radius: 5px;
+  border: 0;
+  color: white;
+  font-size: large;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.edit-popup {
+  position: fixed;
+  justify-content: center;
+  align-items: center;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  padding: 20px;
+  border: none;
+  box-shadow: 1px 2px 2px 2px #d9d9d9;
+  border-radius: 5px;
+  width: 20vw;
+  height: 50vh;
+  /* /* -webkit-backdrop-filter: drop-shadow(10%);
+  backdrop-filter: blur(5px); */
+}
+
+
+.edit-popup h3{
+  text-align: center;
+  font-size: 1.7em;
+}
+
+.edit-section{
+  margin-top: 20px; /* Sesuaikan dengan spasi yang diinginkan */
+}
+
+.edit-popup button{
+  background-color: white;
+}
+
+.quantity-container button{
+  border-radius: 3px;
+  border: 1px solid black;
+  width: 1.6vw;
+}
+
+.edit-popup label {
+  display: block;
+  margin-bottom: 5px; /* Sesuaikan dengan spasi yang diinginkan */
+  margin-top: 15px;
+}
+
+.quantity-container span{
+  padding: 25px;
+}
+
+.edit-section textarea{
+  border-radius: 5px;
+  border: none;
+  background-color: #d9d9d9;
+  resize: none;
+  max-height: 15vh;
+  overflow: auto;
+  height: 15vh;
+  width: 20vw;
+}
+
+.edit-price{
+  margin-top: 15px;
+}
+
+.edit-price h4{
+  margin-top: 5px;
+}
+
+
+.popup-button {
+  text-align: right;
+  margin-top: 20px;
+}
+
+.popup-button button {
+  border-radius: 5px;
+  margin-left: 5px; /* Jarak antar button */
+  height: 4vh;
+}
+
+

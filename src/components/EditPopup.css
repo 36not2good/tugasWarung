@@ -1,0 +1,75 @@
+.edit-popup {
+    position: fixed; /* or absolute */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1000; /* Make sure it's higher than other elements */
+    background-color: white;
+    padding: 20px;
+    border: none;
+    box-shadow: 1px 2px 2px 2px #d9d9d9;
+    border-radius: 5px;
+    width: 20vw;
+    height: 50vh;
+  }
+
+  .edit-popup h3{
+    text-align: center;
+    font-size: 1.7em;
+  }
+
+  .edit-section{
+    margin-top: 20px; /* Sesuaikan dengan spasi yang diinginkan */
+  }
+
+  .edit-popup button{
+    background-color: white;
+  }
+
+  .quantity-container button{
+    border-radius: 3px;
+    border: 1px solid black;
+    width: 1.6vw;
+  }
+  
+  .edit-popup label {
+    display: block;
+    margin-bottom: 5px; /* Sesuaikan dengan spasi yang diinginkan */
+    margin-top: 15px;
+  }
+  
+  .quantity-container span{
+    padding: 25px;
+  }
+
+  .edit-section textarea{
+    border-radius: 5px;
+    border: none;
+    background-color: #d9d9d9;
+    resize: none;
+    max-height: 15vh;
+    overflow: auto;
+    height: 15vh;
+    width: 20vw;
+  }
+
+  .edit-price{
+    margin-top: 15px;
+  }
+
+  .edit-price h4{
+    margin-top: 5px;
+  }
+  
+
+  .popup-button {
+    text-align: right;
+    margin-top: 20px;
+  }
+  
+  .popup-button button {
+    border-radius: 5px;
+    margin-left: 5px; /* Jarak antar button */
+    height: 4vh;
+  }
+  
