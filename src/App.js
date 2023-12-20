@@ -5,19 +5,20 @@ import PageMakanan from "./pages/makanan/makanan";
 import PageMinuman from "./pages/minuman/minuman";
 import PageWarung from "./pages/warung/warung";
 import WarungDetail from "./pages/warung/detailWarung";
+import PageLogin from "./pages/login";
 
 function App() {
   return (
     <Router>
       <div className="App">
-        <Routes> {/* Bungkus semua rute Anda dalam komponen Routes */}
-          <Route path="/" element={<Beranda />} /> {/* Gunakan element untuk menentukan komponen */}
-          <Route path="/makanan" element={<PageMakanan />} /> {/* Gunakan element untuk menentukan komponen */}
+        <Routes>
+          <Route path="/" element={<PageLogin />} />
+          <Route path="/beranda" element={<Beranda />} />
+          <Route path="/makanan" element={<PageMakanan />} />
           <Route path="/minuman" element={<PageMinuman />} />
           <Route path="/warung" element={<PageWarung />} />
-          <Route path="/warung/:id" component={<WarungDetail />} />
+          <Route path="/warung/:id" element={<WarungDetail />} />
         </Routes>
-        {/* <Home /> */}
       </div>
     </Router>
   );

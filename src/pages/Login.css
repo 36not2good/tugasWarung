@@ -1,0 +1,154 @@
+/* .login{
+  display: flex;
+  background-color: #ffffff;
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
+}
+
+.login-container {
+    background-color: #EAD7BB;
+    width: 300px;
+    margin-right: 0 auto;
+    padding: 20px;
+    border: 1px solid #e6d8c5;
+    border-radius: 5px;
+    box-shadow: 0 5px 6px rgba(0, 0, 0, 0.2);
+  }
+
+  
+  .login-header {
+    text-align: center;
+    font-family: 'Calibri';
+    
+  }
+  
+  .login-form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .login-input {
+    margin: 10px 0;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    font-size: 16px;
+    text-align: left;
+    width: 94%;
+    background-color: #fcfaf6;
+    
+  }
+  
+  .login-button {
+    margin-top: 15px;
+    padding: 10px;
+    background-color: #765827;
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+  }
+  
+  .login-button:hover {
+    background-color: #c7a76c;
+  }
+   */
+
+   .login {
+    display: flex;
+    background-color: #ffffff;
+    height: 100vh;
+  }
+  
+  .sidebar {
+    background-color: #EAD7BB;
+    width: 300px;
+    padding: 20px;
+    border: 1px solid #e6d8c5;
+    border-radius: 5px;
+    box-shadow: 0 5px 6px rgba(0, 0, 0, 0.2);
+  }
+  
+  .login-content {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .login-container {
+    background-color: #ffffff;
+    width: 300px;
+    margin-right: 0 auto;
+    padding: 20px;
+    border: 1px solid #ffffff;
+    border-radius: 5px;
+    box-shadow: 0 5px 6px rgba(0, 0, 0, 0.2);
+  }
+  
+  .login-header {
+    text-align: center;
+    font-family: 'Calibri';
+    color: #FF6E40;
+  }
+
+  .register{
+    margin-left: 21vh;
+  }
+
+  .login-header-2 {
+    text-align: center;
+    font-family: 'Calibri';
+    font-size: large;
+    color: #000;
+  }
+  
+  .login-form {
+    margin-top: 20vh;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .login-input {
+    margin: 10px 0;
+    padding: 8px;
+    border: 1px solid #fcfaf6;
+    border-radius: 8px;
+    font-size: 16px;
+    text-align: left;
+    width: 94%;
+    background-color: #e6e6e6;
+  }
+  
+  .login-button {
+    margin-top: 15px;
+    padding: 10px;
+    background-color: #FF6E40;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    box-shadow: 0 5px 6px rgba(0, 0, 0, 0.2);
+  }
+
+  .login-button:hover {
+    background-color: #ff3c00;
+  }
+
+  .regist-button {
+    margin-top: 15px;
+    padding: 10px;
+    background-color: #ffffff;
+    color: #FF6E40;
+    border: 1px solid #FF6E40;
+    border-radius: 8px;
+    cursor: pointer;
+    box-shadow: 0 5px 6px rgba(0, 0, 0, 0.2);
+  }
+  
+  .regist-button:hover {
+    background-color: #ff3c00;
+    color: #ffffff;
+  }
+  
