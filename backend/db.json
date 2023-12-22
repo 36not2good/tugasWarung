@@ -1,202 +1,259 @@
 {
-    "warungs" : [
-        {
-           "id": 1,
-           "nama": "warung selena",
-           "gambar": "warung 01.jpeg"
-        },
-        {
-            "id": 2,
-            "nama": "warung sari rasa",
-            "gambar": "warung 02.jpeg"
-        },
-        {
-            "id": 3,
-            "nama": "warung sari",
-            "gambar": "warung 03.jpeg"
+  "roles": [
+    {
+      "id": 1,
+      "role": "user"
+    },
+    {
+      "id": 2,
+      "role": "admin"
+    }
+  ],
+  "users": [
+    {
+      "id": 1,
+      "username": "nanana",
+      "password": "1234",
+      "role": {
+        "id": 1,
+        "role": "user"
+      }
+    }
+  ],
+  "customers": [
+    {
+      "id": 1,
+      "nama": "nana",
+      "no_hp": "3278",
+      "users": {
+        "id": 1,
+        "username": "nanana",
+        "password": "1234"
+      }
+    },
+    {
+      "nama": "gugu",
+      "no_hp": "0987656747",
+      "users": {
+        "username": "fufufu",
+        "password": "6457",
+        "role": {
+          "id": 1,
+          "role": "user"
         }
-    ],
-    "kategoris" : [
-        {
-            "id": 1,
-            "nama": "makanan"
-        },
-        {
-            "id": 2,
-            "nama": "minuman"
-        }
-    ],
-    "produks" :[
-        {
-            "id": 1,
-            "nama": "Nasi Goreng",
-            "harga": 15000,
-            "image": "Nasi Goreng.jpeg",
-            "is_ready": true,
-            "kategoris": {
-                "id": 1,
-                "nama": "makanan"
-            },
-            "warungs":{
-                "id": 1,
-                "nama": "warung selena"
-             }
-        },
-        {
-            "id": 2,
-            "nama": "Bakso",
-            "harga": 15000,
-            "image": "Baso.jpeg",
-            "is_ready": true,
-            "kategoris": {
-                "id": 1,
-                "nama": "makanan"
-            },
-            "warungs":{
-                "id": 2,
-                "nama": "warung sari rasa"
-             }
-        },
-        {
-            "id": 3,
-            "nama": "Dimsum",
-            "harga": 17000,
-            "image": "dimsum.jpeg",
-            "is_ready": true,
-            "kategoris": {
-                "id": 1,
-                "nama": "makanan"
-            },
-            "warungs":{
-                "id": 3,
-                "nama": "warung sari"
-             }
-        },
-        {
-            "id": 4,
-            "nama": "Nasi Rames",
-            "harga": 20000,
-            "image": "nasi rames.jpeg",
-            "is_ready": true,
-            "kategoris": {
-                "id": 1,
-                "nama": "makanan"
-            },
-            "warungs":{
-                "id": 2,
-                "nama": "warung sari rasa"
-             }
-        },
-        {
-            "id": 5,
-            "nama": "Seblak",
-            "harga": 15000,
-            "image": "seblak.jpeg",
-            "is_ready": true,
-            "kategoris": {
-                "id": 1,
-                "nama": "makanan"
-            },
-            "warungs":{
-                "id": 1,
-                "nama": "warung selena"
-             }
-        },
-        {
-            "id": 6,
-            "nama": "Onigiri",
-            "harga": 15000,
-            "image": "onigiri.jpeg",
-            "is_ready": true,
-            "kategoris": {
-                "id": 1,
-                "nama": "makanan"
-            },
-            "warungs":{
-                "id": 3,
-                "nama": "warung sari"
-             }
-        },
-        {
-            "id": 7,
-            "nama": "Kopi",
-            "harga": 5000,
-            "image": "kopi.jpeg",
-            "is_ready": true,
-            "kategoris": {
-                "id": 2,
-                "nama": "minuman"
-            },
-            "warungs":{
-                "id": 1,
-                "nama": "warung selena"
-             }
-        },
-        {
-            "id": 8,
-            "nama": "Jus Buah",
-            "harga": 15000,
-            "image": "jus buah.jpeg",
-            "is_ready": true,
-            "kategoris": {
-                "id": 2,
-                "nama": "minuman"
-            },
-            "warungs":{
-                "id": 2,
-                "nama": "warung sari rasa"
-             }
-        },
-        {
-            "id": 9,
-            "nama": "Es Teh",
-            "harga": 5000,
-            "image": "es teh.jpeg",
-            "is_ready": true,
-            "kategoris": {
-                "id": 2,
-                "nama": "minuman"
-            },
-            "warungs":{
-                "id": 3,
-                "nama": "warung sari"
-             }
-        },
-        {
-            "id": 10,
-            "nama": "Susu Jahe",
-            "harga": 8000,
-            "image": "susu jahe.jpeg",
-            "is_ready": true,
-            "kategoris": {
-                "id": 2,
-                "nama": "minuman"
-            },
-            "warungs":{
-                "id": 1,
-                "nama": "warung selena"
-             }
-        },
-        {
-            "id": 11,
-            "nama": "Pop Ice",
-            "harga": 5000,
-            "image": "popice.jpeg",
-            "is_ready": true,
-            "kategoris": {
-                "id": 2,
-                "nama": "minuman"
-            },
-            "warungs":{
-                "id": 2,
-                "nama": "warung sari rasa"
-             }
-        }
-    ],
-    "pesanans":[
-        {
-            "menus":[]
-        }
-    ]
-
+      },
+      "id": 6
+    }
+  ],
+  "owners": [
+    {
+      "id": 1,
+      "nama": "",
+      "no_hp": "",
+      "users": {
+        "id": 1,
+        "username": "",
+        "password": ""
+      }
+    }
+  ],
+  "warungs": [
+    {
+      "id": 1,
+      "nama": "warung selena",
+      "gambar": "warung 01.jpeg"
+    },
+    {
+      "id": 2,
+      "nama": "warung sari rasa",
+      "gambar": "warung 02.jpeg"
+    },
+    {
+      "id": 3,
+      "nama": "warung sari",
+      "gambar": "warung 03.jpeg"
+    }
+  ],
+  "kategoris": [
+    {
+      "id": 1,
+      "nama": "makanan"
+    },
+    {
+      "id": 2,
+      "nama": "minuman"
+    }
+  ],
+  "produks": [
+    {
+      "id": 1,
+      "nama": "Nasi Goreng",
+      "harga": 15000,
+      "image": "Nasi Goreng.jpeg",
+      "is_ready": true,
+      "kategoris": {
+        "id": 1,
+        "nama": "makanan"
+      },
+      "warungs": {
+        "id": 1,
+        "nama": "warung selena"
+      }
+    },
+    {
+      "id": 2,
+      "nama": "Bakso",
+      "harga": 15000,
+      "image": "Baso.jpeg",
+      "is_ready": true,
+      "kategoris": {
+        "id": 1,
+        "nama": "makanan"
+      },
+      "warungs": {
+        "id": 2,
+        "nama": "warung sari rasa"
+      }
+    },
+    {
+      "id": 3,
+      "nama": "Dimsum",
+      "harga": 17000,
+      "image": "dimsum.jpeg",
+      "is_ready": true,
+      "kategoris": {
+        "id": 1,
+        "nama": "makanan"
+      },
+      "warungs": {
+        "id": 3,
+        "nama": "warung sari"
+      }
+    },
+    {
+      "id": 4,
+      "nama": "Nasi Rames",
+      "harga": 20000,
+      "image": "nasi rames.jpeg",
+      "is_ready": true,
+      "kategoris": {
+        "id": 1,
+        "nama": "makanan"
+      },
+      "warungs": {
+        "id": 2,
+        "nama": "warung sari rasa"
+      }
+    },
+    {
+      "id": 5,
+      "nama": "Seblak",
+      "harga": 15000,
+      "image": "seblak.jpeg",
+      "is_ready": true,
+      "kategoris": {
+        "id": 1,
+        "nama": "makanan"
+      },
+      "warungs": {
+        "id": 1,
+        "nama": "warung selena"
+      }
+    },
+    {
+      "id": 6,
+      "nama": "Onigiri",
+      "harga": 15000,
+      "image": "onigiri.jpeg",
+      "is_ready": true,
+      "kategoris": {
+        "id": 1,
+        "nama": "makanan"
+      },
+      "warungs": {
+        "id": 3,
+        "nama": "warung sari"
+      }
+    },
+    {
+      "id": 7,
+      "nama": "Kopi",
+      "harga": 5000,
+      "image": "kopi.jpeg",
+      "is_ready": true,
+      "kategoris": {
+        "id": 2,
+        "nama": "minuman"
+      },
+      "warungs": {
+        "id": 1,
+        "nama": "warung selena"
+      }
+    },
+    {
+      "id": 8,
+      "nama": "Jus Buah",
+      "harga": 15000,
+      "image": "jus buah.jpeg",
+      "is_ready": true,
+      "kategoris": {
+        "id": 2,
+        "nama": "minuman"
+      },
+      "warungs": {
+        "id": 2,
+        "nama": "warung sari rasa"
+      }
+    },
+    {
+      "id": 9,
+      "nama": "Es Teh",
+      "harga": 5000,
+      "image": "es teh.jpeg",
+      "is_ready": true,
+      "kategoris": {
+        "id": 2,
+        "nama": "minuman"
+      },
+      "warungs": {
+        "id": 3,
+        "nama": "warung sari"
+      }
+    },
+    {
+      "id": 10,
+      "nama": "Susu Jahe",
+      "harga": 8000,
+      "image": "susu jahe.jpeg",
+      "is_ready": true,
+      "kategoris": {
+        "id": 2,
+        "nama": "minuman"
+      },
+      "warungs": {
+        "id": 1,
+        "nama": "warung selena"
+      }
+    },
+    {
+      "id": 11,
+      "nama": "Pop Ice",
+      "harga": 5000,
+      "image": "popice.jpeg",
+      "is_ready": true,
+      "kategoris": {
+        "id": 2,
+        "nama": "minuman"
+      },
+      "warungs": {
+        "id": 2,
+        "nama": "warung sari rasa"
+      }
+    }
+  ],
+  "pesanans": [
+    {
+      "menus": []
+    }
+  ]
 }

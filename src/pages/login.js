@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Login.css';
+import foto from './login.png';
+import axios from 'axios';
 
 function Login() {
     const navigate = useNavigate();
     const [formData, setFormData] = useState({
         username: '',
         password: '',
-        isLoggedIn: false,
     });
 
     const handleInputChange = (event) => {
@@ -18,21 +19,48 @@ function Login() {
         });
     };
 
-    const handleSubmit = (event) => {
-        event.preventDefault();
-        const { username, password } = formData;
+    // ...
 
-        // Simple username and password validation
-        if (username === 'user' && password === 'password') {
-            setFormData({
-                ...formData,
-                isLoggedIn: true,
-            });
-            alert('Login successful');
-            navigate('/beranda');
+    const handleSubmit = async (event) => {
+        event.preventDefault();
+    const { username, password } = formData;
+
+    try {
+        // Send a login request to your backend API
+        const response = await axios.get('http://localhost:3001/users', {
+            params: { username, password },
+        });
+
+        if (response.status === 200) {
+            // Check if user data is available in the response
+            if (response.data.length > 0) {
+                const user = response.data[0];
+                alert('Login successful');
+
+                // Save user data (e.g., role) to local storage or context for future use
+                // For example, localStorage.setItem('user', JSON.stringify(user));
+
+                // Navigate to the appropriate page based on the user's role
+                if (user.role.role === 'user') {
+                    navigate('/beranda');
+                } else if (user.role.role === 'admin') {
+                    navigate('/admin-dashboard');
+                }
+            } else {
+                alert('Login failed. Please check your credentials and try again.');
+            }
         } else {
-            alert('Login failed. Please try again.');
+            alert('Login failed. Please check your credentials and try again.');
         }
+    } catch (error) {
+        console.error('Error during login:', error);
+        alert('An error occurred. Please try again.');
+    }
+    };
+
+
+    const handleRegisterClick = () => {
+        navigate('/register'); // Navigate to the register page
     };
 
     const { username, password } = formData;
@@ -66,11 +94,14 @@ function Login() {
                     <button type="submit" className="login-button">
                         Login now
                     </button>
-                    <h5 className="register">Or</h5>
-                    <button type="submit" className="regist-button">
+                    <h5 className="register"><hr />Or<hr /></h5>
+                    <button type="button" className="regist-button" onClick={handleRegisterClick}>
                         Register now
                     </button>
                 </form>
+            </div>
+            <div className="foto-register">
+                <img src={foto} alt="" />
             </div>
         </div>
     );

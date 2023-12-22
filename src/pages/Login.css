@@ -57,11 +57,11 @@
 
    .login {
     display: flex;
-    background-color: #ffffff;
+    background-color: #F1F3F6;
     height: 100vh;
   }
   
-  .sidebar {
+  /* .sidebar {
     background-color: #EAD7BB;
     width: 300px;
     padding: 20px;
@@ -69,23 +69,30 @@
     border-radius: 5px;
     box-shadow: 0 5px 6px rgba(0, 0, 0, 0.2);
   }
-  
-  .login-content {
+   */
+  /* .login-content {
     flex: 1;
     display: flex;
     justify-content: center;
     align-items: center;
-  }
+  } */
   
   .login-container {
     background-color: #ffffff;
-    width: 300px;
-    margin-right: 0 auto;
+    width: 25%; /* 1/4 halaman */
     padding: 20px;
     border: 1px solid #ffffff;
     border-radius: 5px;
     box-shadow: 0 5px 6px rgba(0, 0, 0, 0.2);
+  
+    /* Menengahkan .login-form secara vertikal */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%; /* Menetapkan tinggi 100% */
   }
+  
   
   .login-header {
     text-align: center;
@@ -93,9 +100,23 @@
     color: #FF6E40;
   }
 
-  .register{
-    margin-left: 21vh;
-  }
+.register::before,
+.register::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background-color: #ccc;
+    margin: 0 10px;
+}
+
+.register {
+    display: flex;
+    align-items: center;
+    color: #000000;
+    font-size: 14px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
 
   .login-header-2 {
     text-align: center;
@@ -105,9 +126,9 @@
   }
   
   .login-form {
-    margin-top: 20vh;
     display: flex;
     flex-direction: column;
+    align-self: center;
   }
   
   .login-input {
@@ -123,6 +144,7 @@
   
   .login-button {
     margin-top: 15px;
+    margin-bottom: 15px ;
     padding: 10px;
     background-color: #FF6E40;
     color: #fff;
@@ -150,5 +172,17 @@
   .regist-button:hover {
     background-color: #ff3c00;
     color: #ffffff;
+  }
+
+  .foto-register {
+    width: 75%; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .foto-register img{
+    width: 60%;
+    height: 60%;
   }
   

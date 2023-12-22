@@ -52,10 +52,10 @@ class NavbarComponent extends React.Component {
 
   render() {
     return (
-      <div className="navbar">
+      <div className="navbar"> 
         <div className="logo">Canteen</div>
         <ul className="nav-links">
-          <li className="home"><a href="/" className="active-page">Home</a></li>
+          <li className="home"><a href="/beranda" className="active-page">Home</a></li>
           <li className="warung"><a href="/warung">Warung</a></li>
           <li className="dropdown kategori-menu" style={{ cursor: 'pointer'}}>
             <div className="dropdown-toggle" onClick={this.toggleMenu}>

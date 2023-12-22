@@ -6,6 +6,7 @@ import PageMinuman from "./pages/minuman/minuman";
 import PageWarung from "./pages/warung/warung";
 import WarungDetail from "./pages/warung/detailWarung";
 import PageLogin from "./pages/login";
+import PageRegister from "./pages/Register";
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
       <div className="App">
         <Routes>
           <Route path="/" element={<PageLogin />} />
+          <Route path="/register" element={<PageRegister />} />
           <Route path="/beranda" element={<Beranda />} />
           <Route path="/makanan" element={<PageMakanan />} />
           <Route path="/minuman" element={<PageMinuman />} />
