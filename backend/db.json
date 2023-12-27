@@ -18,6 +18,15 @@
         "id": 1,
         "role": "user"
       }
+    },
+    {
+      "id": 2,
+      "username": "lenaa",
+      "password": "1234",
+      "role": {
+        "id": 2,
+        "role": "admin"
+      }
     }
   ],
   "customers": [
@@ -48,12 +57,12 @@
   "owners": [
     {
       "id": 1,
-      "nama": "",
-      "no_hp": "",
+      "nama": "selena",
+      "no_hp": "0647854",
       "users": {
-        "id": 1,
-        "username": "",
-        "password": ""
+        "id": 2,
+        "username": "lenaa",
+        "password": "1234"
       }
     }
   ],
@@ -61,7 +70,12 @@
     {
       "id": 1,
       "nama": "warung selena",
-      "gambar": "warung 01.jpeg"
+      "gambar": "warung 01.jpeg",
+      "owners": {
+        "id" : 1,
+        "nama": "selena",
+        "no_hp": "0647854"
+      }
     },
     {
       "id": 2,
@@ -223,7 +237,7 @@
     {
       "id": 10,
       "nama": "Susu Jahe",
-      "harga": 8000,
+     "harga": 8000,
       "image": "susu jahe.jpeg",
       "is_ready": true,
       "kategoris": {

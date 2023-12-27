@@ -36,10 +36,14 @@ class Warung extends Component {
     };
   }
 
-  handleWarungClick = (warung) => {
-    // Tangani acara klik, navigasi ke halaman detail makanan warung
-    this.props.history.push(`/warung/${warung.id}`);
-  };
+  // ...
+
+handleWarungClick = (warung) => {
+  // Tangani acara klik, navigasi ke halaman detail warung dengan menyertakan ID warung
+  this.props.history.push(`/warung/${warung.idWarung}`);
+};
+
+// ..
 
   render() {
     const { warungs } = this.state;

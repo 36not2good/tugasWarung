@@ -29,7 +29,7 @@
 // export default BasicExample;
 
 import React from 'react';
-import "./navbar.css"; 
+import "./navbar.css";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCaretDown } from '@fortawesome/free-solid-svg-icons';
 
@@ -52,18 +52,19 @@ class NavbarComponent extends React.Component {
 
   render() {
     return (
-      <div className="navbar"> 
+      <div className="navbar">
         <div className="logo">Canteen</div>
         <ul className="nav-links">
+          <li className="log-out"><a href="/">Log out</a></li>
           <li className="home"><a href="/beranda" className="active-page">Home</a></li>
           <li className="warung"><a href="/warung">Warung</a></li>
-          <li className="dropdown kategori-menu" style={{ cursor: 'pointer'}}>
+          <li className="dropdown kategori-menu" style={{ cursor: 'pointer' }}>
             <div className="dropdown-toggle" onClick={this.toggleMenu}>
               Kategori Menu <FontAwesomeIcon icon={faCaretDown} />
             </div>
             <ul className="dropdown-content" style={{ display: this.state.isOpen ? 'block' : 'none' }}>
               <div className='text-1'><a href="/makanan">Makanan</a></div>
-              <hr/>
+              <hr />
               <div className='text-2'><a href="/minuman">Minuman</a></div>
             </ul>
           </li>
