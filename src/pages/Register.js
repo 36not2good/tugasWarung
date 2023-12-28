@@ -15,12 +15,55 @@ function Register() {
         confirmPassword: '',
     });
 
+    const [errorMessages, setErrorMessages] = useState({
+        nama: '',
+        no_hp: '',
+        username: '',
+        password: '',
+        confirmPassword: '',
+    });
+
     const handleInputChange = (event) => {
         const { name, value } = event.target;
         setFormData({
             ...formData,
             [name]: value,
         });
+
+        setErrorMessages({
+            ...errorMessages,
+            [name]: '',
+        });
+    };
+
+    const validateForm = () => {
+        const {nama, no_hp, username, password, confirmPassword} = formData;
+        let isValid = true;
+        const newErrorMessages = {};
+
+        if (!nama && !no_hp && !username && !password && !confirmPassword) {
+            alert('Isi form registrasi terlebih dahulu');
+            isValid = false;
+        } else if (!nama) {
+            newErrorMessages.nama = 'Please enter your name';
+            isValid = false;
+        } else if (!no_hp) {
+            newErrorMessages.no_hp = 'Please enter your phone number';
+            isValid = false;
+        } else if (!username) {
+            newErrorMessages.username = 'Please enter your username';
+            isValid = false;
+        } else if (!password) {
+            newErrorMessages.password = 'Please enter your password';
+            isValid = false;
+        } else if (!confirmPassword) {
+            newErrorMessages.confirmPassword = 'Please enter your password again';
+            isValid = false;
+        }
+
+        setErrorMessages(newErrorMessages);
+
+        return isValid;
     };
 
     const handleSubmit = async (event) => {
@@ -65,6 +108,10 @@ function Register() {
         // }
         event.preventDefault();
         const { nama, no_hp, username, password, confirmPassword } = formData;
+
+        if (!validateForm()) {
+            return;
+        }
 
         if (password === confirmPassword) {
             try {
@@ -116,6 +163,7 @@ function Register() {
                             className="login-input"
                             placeholder="Nama"
                         />
+                        <p className="error-message">{errorMessages.nama}</p>
                     </div>
                     <div>
                         <input
@@ -126,6 +174,7 @@ function Register() {
                             className="login-input"
                             placeholder="Nomor Hp"
                         />
+                        <p className="error-message">{errorMessages.no_hp}</p>
                     </div>
                     <div>
                         <input
@@ -136,6 +185,7 @@ function Register() {
                             className="login-input"
                             placeholder="username"
                         />
+                        <p className="error-message">{errorMessages.username}</p>
                     </div>
                     <div>
                         <input
@@ -146,6 +196,7 @@ function Register() {
                             className="login-input"
                             placeholder="Password"
                         />
+                        <p className="error-message">{errorMessages.password}</p>
                     </div>
                     <div>
                         <input
@@ -156,6 +207,7 @@ function Register() {
                             className="login-input"
                             placeholder="Confirm password"
                         />
+                        <p className="error-message">{errorMessages.confirmPassword}</p>
                     </div>
                     <button type="submit" className="login-button">
                         Register Now

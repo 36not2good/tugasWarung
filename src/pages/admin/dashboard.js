@@ -1,19 +1,32 @@
-import React, {  } from 'react';
-import {useLocation} from 'react-router-dom'
+// Dashboard.js
+import React, { useState, useEffect } from 'react';
 import Navbar from '../../components/Navbar';
 import FooterComponent from '../../components/FooterComponent';
-import "./dashboard.css"
+import { useAuth } from '../../context/AuthContext';
 
+import './dashboard.css';
 
 export default function Dashboard() {
-  let location = useLocation();
+  const { loggedInOwner } = useAuth();
+  const [warungName, setWarungName] = useState('');
 
-  console.log(location)
+  useEffect(() => {
+    // Periksa apakah ada pemilik yang sedang login
+    if (loggedInOwner) {
+      // Akses nama warung langsung dari data pemilik
+      const warungName = loggedInOwner.nama || '';
+      setWarungName(warungName);
+    }
+  }, [loggedInOwner]); // Menjalankan kembali efek ketika loggedInOwner berubah
+
   return (
     <div>
-        <Navbar />
-        <div className='container'></div>
-        <FooterComponent />
+      <Navbar />
+      <div className="container">
+        <h1>Selamat datang di {warungName}!</h1>
+        {/* Konten lain dari dasbor */}
       </div>
-  )
+      <FooterComponent />
+    </div>
+  );
 }

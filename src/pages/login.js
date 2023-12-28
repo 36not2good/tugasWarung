@@ -1,13 +1,19 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import Skeleton from 'react-loading-skeleton';
+import { useAuth } from '../context/AuthContext';
 import './Login.css';
 import foto from './login.png';
 import axios from 'axios';
 
 function Login() {
     const navigate = useNavigate();
+    const { login } = useAuth();
     const [formData, setFormData] = useState({
+        username: '',
+        password: '',
+    });
+
+    const [errorMessages, setErrorMessages] = useState({
         username: '',
         password: '',
     });
@@ -18,51 +24,83 @@ function Login() {
             ...formData,
             [name]: value,
         });
+
+        // Clear error message when user starts typing
+        setErrorMessages({
+            ...errorMessages,
+            [name]: '',
+        });
     };
 
-    // ...
+    const validateForm = () => {
+        const { username, password } = formData;
+        let isValid = true;
+        const newErrorMessages = {};
+
+        if (!username && !password) {
+            alert('Please enter your username and password');
+            isValid = false;
+        } else if (!username) {
+            newErrorMessages.username = 'Please enter your username';
+            isValid = false;
+        } else if (!password) {
+            newErrorMessages.password = 'Please enter your password';
+            isValid = false;
+        }
+
+        setErrorMessages(newErrorMessages);
+
+        return isValid;
+    };
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-        const { username, password } = formData;
-
-        try {
-            // Send a login request to your backend API
-            const response = await axios.get('http://localhost:3001/users', {
-                params: { username, password },
-            });
-
-            if (response.status === 200) {
-                // Check if user data is available in the response
-                if (response.data.length > 0) {
-                    const user = response.data[0];
-                    alert('Login successful');
-
-                    // Save user data (e.g., role) to local storage or context for future use
-                    // For example, localStorage.setItem('user', JSON.stringify(user));
-
-                    // Add a delay (e.g., 2000 milliseconds) before navigating
-                    setTimeout(() => {
-                        // Navigate to the appropriate page based on the user's role
-                        if (user.role.role === 'user') {
-                            navigate('/beranda');
-                        } else if (user.role.role === 'admin') {
-                            navigate('/dashboard');
-                        }
-                    }, 2000); // 2000 milliseconds (2 seconds) delay
-                } else {
-                    alert('Login failed. Please check your credentials and try again.');
-                }
-            } else {
-                alert('Login failed. Please check your credentials and try again.');
-            }
-        } catch (error) {
-            console.error('Error during login:', error);
-            alert('An error occurred. Please try again.');
+    
+        if (!validateForm()) {
+          return;
         }
-    };
-
-
+    
+        const { username, password } = formData;
+    
+        try {
+          const response = await axios.get('http://localhost:3001/users', {
+            params: { username, password },
+          });
+    
+          if (response.status === 200) {
+            if (response.data.length > 0) {
+              const user = response.data[0];
+              alert('Login successful');
+    
+              // Call the login function from AuthContext
+              login(user);
+    
+              // Navigate based on user role
+              setTimeout(() => {
+                if (user.role.role === 'user') {
+                  navigate('/beranda');
+                } else if (user.role.role === 'admin') {
+                  navigate('/dashboard');
+                }
+              }, 2000);
+            } else {
+              if (!username || !password) {
+                setErrorMessages({
+                  username: 'Username is incorrect',
+                  password: 'Password is incorrect',
+                });
+              } else {
+                alert('Username and password are incorrect');
+              }
+            }
+          } else {
+            alert('Login failed. Please check your credentials and try again');
+          }
+        } catch (error) {
+          console.error('Error during login:', error);
+          alert('An error occurred. Please try again.');
+        }
+      };
 
     const handleRegisterClick = () => {
         navigate('/register'); // Navigate to the register page
@@ -85,6 +123,7 @@ function Login() {
                             className="login-input"
                             placeholder="Username"
                         />
+                        <p className="error-message">{errorMessages.username}</p>
                     </div>
                     <div>
                         <input
@@ -95,6 +134,7 @@ function Login() {
                             className="login-input"
                             placeholder="Password"
                         />
+                        <p className="error-message">{errorMessages.password}</p>
                     </div>
                     <button type="submit" className="login-button">
                         Login now
