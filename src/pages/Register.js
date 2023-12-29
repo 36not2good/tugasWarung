@@ -131,7 +131,7 @@ function Register() {
 
                 if (customerResponse.status === 201) {
                     alert('Registration successful');
-                    navigate('/beranda');
+                    navigate('/');
                 } else {
                     alert('Failed to register. Please try again.');
                 }
@@ -155,6 +155,7 @@ function Register() {
                     <div>
                         <h1 className="login-header">Canteen</h1>
                         <h2 className="login-header-2">Register for an account</h2>
+            <label>Nama</label>
                         <input
                             type="text"
                             name="nama"
@@ -164,8 +165,7 @@ function Register() {
                             placeholder="Nama"
                         />
                         <p className="error-message">{errorMessages.nama}</p>
-                    </div>
-                    <div>
+            <label>Nomor Hp</label>
                         <input
                             type="number"
                             name="no_hp"
@@ -175,8 +175,7 @@ function Register() {
                             placeholder="Nomor Hp"
                         />
                         <p className="error-message">{errorMessages.no_hp}</p>
-                    </div>
-                    <div>
+            <label>Username</label>
                         <input
                             type="text"
                             name="username"
@@ -186,8 +185,7 @@ function Register() {
                             placeholder="username"
                         />
                         <p className="error-message">{errorMessages.username}</p>
-                    </div>
-                    <div>
+            <label>Password</label>
                         <input
                             type="password"
                             name="password"
@@ -197,8 +195,7 @@ function Register() {
                             placeholder="Password"
                         />
                         <p className="error-message">{errorMessages.password}</p>
-                    </div>
-                    <div>
+            <label>Confirm Password</label>
                         <input
                             type="password"
                             name="confirmPassword"
