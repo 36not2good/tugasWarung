@@ -23,21 +23,25 @@
 .warung-list{
     display: flex;
     flex-direction: row;
-    width: 100vh;
+    width: 80vw;
   }
   
   .warung-card {
     border-radius: 5px;
-    margin: 10px;
+    margin: auto;
     cursor: pointer;
     flex-direction: column; /* Mengatur tata letak menjadi kolom */
     align-items: center;
-    width: 230px;
-    height: 190px;
+    width: 250px;
+    height: 200px;
     box-shadow: 1px 2px 2px 2px #d9d9d9;
     text-decoration: none; /* Menghapus garis bawah default dari tautan */
     color: black; /* Warna teks untuk tautan tidak aktif */
   }
+  
+.warung-card:hover {
+  transform: scale(1.05); /* Perbesar kartu saat dihover */
+}
 
   .warung-image-container {
     width: 100%; /* Mengisi seluruh lebar container */

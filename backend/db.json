@@ -52,6 +52,19 @@
         }
       },
       "id": 6
+    },
+    {
+      "nama": "gaga",
+      "no_hp": "0376342465",
+      "users": {
+        "username": "gagak",
+        "password": "4756",
+        "role": {
+          "id": 1,
+          "role": "user"
+        }
+      },
+      "id": 7
     }
   ],
   "owners": [
@@ -72,7 +85,7 @@
       "nama": "warung selena",
       "gambar": "warung 01.jpeg",
       "owners": {
-        "id" : 1,
+        "id": 1,
         "nama": "selena",
         "no_hp": "0647854"
       }
@@ -237,7 +250,7 @@
     {
       "id": 10,
       "nama": "Susu Jahe",
-     "harga": 8000,
+      "harga": 8000,
       "image": "susu jahe.jpeg",
       "is_ready": true,
       "kategoris": {

@@ -14,7 +14,7 @@ export default function Dashboard() {
     // Periksa apakah ada pemilik yang sedang login
     if (loggedInOwner) {
       // Akses nama warung langsung dari data pemilik
-      const warungName = loggedInOwner.nama || '';
+      const warungName = loggedInOwner.owners.nama || '';
       setWarungName(warungName);
     }
   }, [loggedInOwner]); // Menjalankan kembali efek ketika loggedInOwner berubah

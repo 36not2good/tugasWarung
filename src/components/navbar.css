@@ -9,7 +9,7 @@ body, h1, h2, h3, p, ul, li {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: #FF6E40;
+    background-image: linear-gradient(#ff9966, #ff5e62);
     padding: 10px 20px;
     color: white;
     cursor: default;

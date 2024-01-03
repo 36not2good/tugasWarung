@@ -51,69 +51,20 @@ function Login() {
     setErrorMessages(newErrorMessages);
 
     return isValid;
-  };
-
-  // const handleSubmit = async (event) => {
-  //     event.preventDefault();
-
-  //     if (!validateForm()) {
-  //       return;
-  //     }
-
-  //     const { username, password } = formData;
-
-  //     try {
-  //       const response = await axios.get('http://localhost:3001/users', {
-  //         params: { username, password },
-  //       });
-
-  //       if (response.status === 200) {
-  //         if (response.data.length > 0) {
-  //           const user = response.data[0];
-  //           alert('Login successful');
-
-  //           // Call the login function from AuthContext
-  //           login(user);
-
-  //           // Navigate based on user role
-  //           setTimeout(() => {
-  //             if (user.role.role === 'user') {
-  //               navigate('/beranda');
-  //             } else if (user.role.role === 'admin') {
-  //               navigate('/dashboard');
-  //             }
-  //           }, 2000);
-  //         } else {
-  //           if (!username || !password) {
-  //             setErrorMessages({
-  //               username: 'Username is incorrect',
-  //               password: 'Password is incorrect',
-  //             });
-  //           } else {
-  //             alert('Username and password are incorrect');
-  //           }
-  //         }
-  //       } else {
-  //         alert('Login failed. Please check your credentials and try again');
-  //       }
-  //     } catch (error) {
-  //       console.error('Error during login:', error);
-  //       alert('An error occurred. Please try again.');
-  //     }
-  //   };
-
+  }
+  
   const handleSubmit = async (event) => {
     event.preventDefault();
-  
+    
     if (!validateForm()) {
       return;
     }
   
     const { username, password } = formData;
-  
+    console.log(formData);
     try {
       const response = await axios.get('http://localhost:3001/users');
-  
+      console.log(response.data);
       if (response.status === 200) {
         const userWithMatchingUsername = response.data.find(user => user.username === username);
         const userWithMatchingPassword = response.data.find(user => user.password === password);
@@ -126,14 +77,12 @@ function Login() {
           // Call the login function from AuthContext
           login(matchingUser);
   
-          // Navigate based on user role
-          setTimeout(() => {
+          // Navigate based on user role          
             if (matchingUser.role.role === 'user') {
               navigate('/beranda');
             } else if (matchingUser.role.role === 'admin') {
               navigate('/dashboard');
             }
-          }, 2000);
         } else {
           // Check if either username or password is incorrect
           if (!userWithMatchingUsername) {
