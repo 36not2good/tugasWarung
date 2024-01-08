@@ -38,18 +38,42 @@ body, h1, h2, h3, p, ul, li {
 
   .warung{
     font-family: 'Mukta', sans-serif;
+    transition: transform 0.3s ease;
+  }
+  .warung:hover{
+    background-color: #ff4545;
+    transform: scale(1.15);
+    border-radius: 8px;
   }
 
   .home{
     font-family: 'Mukta', sans-serif;
+    transition: transform 0.3s ease;
+  }
+  .home:hover{
+    background-color: #ff4545;
+    transform: scale(1.15);
+    border-radius: 8px;
   }
 
   .logout{
     font-family: 'Mukta', sans-serif;
+    transition: transform 0.3s ease;
+  }
+  .logout:hover{
+    background-color: #ff4545;
+    transform: scale(1.15);
+    border-radius: 8px;
   }
 
   .dropdown-toggle{
     font-family: 'Mukta', sans-serif;
+    transition: transform 0.3s ease;
+  }
+  .dropdown-toggle:hover{
+    background-color: #ff4545;
+    transform: scale(1.15);
+    border-radius: 8px;
   }
   
   /* Styling untuk link di sebelah kanan */
@@ -57,7 +81,8 @@ body, h1, h2, h3, p, ul, li {
     list-style: none;
     display: flex;
   }
-  
+
+
   .nav-links li {
     margin-right: 15px;
   }
