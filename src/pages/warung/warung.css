@@ -1,81 +1,91 @@
+/* Default styles for larger screens */
 .warung-container {
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh; /* Set the minimum height of the container to 100% of the viewport height */
-    cursor: default;
-  }
-
-.content-warung{
-    display:flex;
-    height: 100vh;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  cursor: default;
 }
 
-.content-warung h2{
-    padding: 20px;
-    font-size: 3.5em;
-    font-family: Arial, Helvetica, sans-serif;
+.content-warung {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex: 1;
 }
 
-.warung-list{
-    display: flex;
-    flex-direction: row;
-    width: 80vw;
-  }
-  
-  .warung-card {
-    border-radius: 5px;
-    margin: auto;
-    cursor: pointer;
-    flex-direction: column; /* Mengatur tata letak menjadi kolom */
-    align-items: center;
-    width: 250px;
-    height: 200px;
-    box-shadow: 1px 2px 2px 2px #d9d9d9;
-    text-decoration: none; /* Menghapus garis bawah default dari tautan */
-    color: black; /* Warna teks untuk tautan tidak aktif */
-  }
-  
+.content-warung h2 {
+  padding: 20px;
+  font-size: 3.5em;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.warung-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+  padding: 20px;
+}
+
+.warung-card {
+  border-radius: 5px;
+  cursor: pointer;
+  flex-direction: column;
+  align-items: center;
+  width: 250px;
+  max-height: 200px; /* Set maximum height */
+  box-shadow: 1px 2px 2px 2px #d9d9d9;
+  text-decoration: none;
+  color: black;
+  margin-bottom: 20px;
+}
+
 .warung-card:hover {
-  transform: scale(1.05); /* Perbesar kartu saat dihover */
+  transform: scale(1.05);
 }
 
-  .warung-image-container {
-    width: 100%; /* Mengisi seluruh lebar container */
-    height: 62%; /* Menutupi setengah tinggi container */
-    overflow: hidden; /* Membuat gambar hanya menutupi setengah container */
-    border-radius: 5px;
-  }
-  
-  .warung-image {
-    width: 100%;
-    object-fit: cover;
-  }
-  
-  .warung-details {
-    width: 100%; /* Mengisi seluruh lebar container */
-    padding-top: 10px; /* Menambah ruang di atas detail makanan */
-    margin-left: 5px;
-  }
+.warung-image-container {
+  width: 100%;
+  height: 62%;
+  overflow: hidden;
+  border-radius: 5px;
+}
 
-  .warung-details h3{
-    margin-top: 14px;
-    text-align: center;
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-    font-size: 1em;
-    font-weight: normal;
+.warung-image {
+  width: 100%;
+  object-fit: cover;
+}
+
+.warung-details {
+  width: 100%;
+  padding-top: 10px;
+  margin-left: 5px;
+}
+
+.warung-details h3 {
+  margin-top: 14px;
+  text-align: center;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-size: 1em;
+  font-weight: normal;
+}
+
+.warung-details p {
+  font-size: 1em;
+  color: black;
+}
+
+.warung-details h4 {
+  margin-left: auto;
+  margin-top: -30px;
+}
+
+@media only screen and (max-width: 768px) {
+  .warung-card {
+    width: 100%; /* Set width to 100% on smaller screens */
+    height: auto; /* Allow the height to adjust based on content */
+    max-width: 200px; /* Remove maximum width */
   }
-  
-  .warung-details p{
-    font-size: 1em;
-    color: black;
-  }
-  
-  .warung-details h4{
-    margin-left: 155px;
-    margin-top: -30px;
-  }
+}
 

@@ -1,97 +1,43 @@
-/* .login{
+/* Default styles for larger screens */
+.login {
   display: flex;
-  background-color: #ffffff;
+  background-color: #F1F3F6;
   height: 100vh;
-  justify-content: center;
-  align-items: center;
 }
 
 .login-container {
-    background-color: #EAD7BB;
-    width: 300px;
-    margin-right: 0 auto;
-    padding: 20px;
-    border: 1px solid #e6d8c5;
-    border-radius: 5px;
-    box-shadow: 0 5px 6px rgba(0, 0, 0, 0.2);
-  }
+  background-color: #ffffff;
+  width: 30%;
+  border: 1px solid #ffffff;
+  border-radius: 5px;
+  box-shadow: 0 5px 6px rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
 
-  
-  .login-header {
-    text-align: center;
-    font-family: 'Calibri';
-    
+/* Responsive styles for smaller screens */
+@media only screen and (max-width: 768px) {
+  .login-container {
+    width: 100%; /* Lebar penuh pada layar yang lebih kecil */
+    margin: 10px; /* Tambahkan margin untuk penataan yang lebih baik */
   }
+  
+  .foto-register {
+    width: 100%; /* Buat kontainer gambar menjadi lebar penuh pada layar yang lebih kecil */
+    margin: auto;
+    overflow: hidden;
+  }
+}
+
   
   .login-form {
     display: flex;
     flex-direction: column;
+    align-self: center;
   }
-  
-  .login-input {
-    margin: 10px 0;
-    padding: 8px;
-    border: 1px solid #ccc;
-    border-radius: 10px;
-    font-size: 16px;
-    text-align: left;
-    width: 94%;
-    background-color: #fcfaf6;
-    
-  }
-  
-  .login-button {
-    margin-top: 15px;
-    padding: 10px;
-    background-color: #765827;
-    color: #fff;
-    border: none;
-    border-radius: 10px;
-    cursor: pointer;
-  }
-  
-  .login-button:hover {
-    background-color: #c7a76c;
-  }
-   */
-
-   .login {
-    display: flex;
-    background-color: #F1F3F6;
-    height: 100vh;
-  }
-  
-  /* .sidebar {
-    background-color: #EAD7BB;
-    width: 300px;
-    padding: 20px;
-    border: 1px solid #e6d8c5;
-    border-radius: 5px;
-    box-shadow: 0 5px 6px rgba(0, 0, 0, 0.2);
-  }
-   */
-  /* .login-content {
-    flex: 1;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  } */
-  
-  .login-container {
-    background-color: #ffffff;
-    width: 30%; /* 1/4 halaman */
-    border: 1px solid #ffffff;
-    border-radius: 5px;
-    box-shadow: 0 5px 6px rgba(0, 0, 0, 0.2);
-  
-    /* Menengahkan .login-form secara vertikal */
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    height: 100%; /* Menetapkan tinggi 100% */
-  }
-  
   
   .login-header {
     text-align: center;
@@ -100,6 +46,7 @@
     margin-bottom: 7px;
     font-size: 2.4em;
   }
+  
 
 .register::before,
 .register::after {
@@ -127,11 +74,6 @@
     margin-bottom: 20px;
   }
   
-  .login-form {
-    display: flex;
-    flex-direction: column;
-    align-self: center;
-  }
   
   .login-input {
     margin: 10px 0;
@@ -177,15 +119,15 @@
   }
 
   .foto-register {
-    width: 75%; 
+    width: 50%; 
     display: flex;
-    align-items: center;
-    justify-content: center;
+    margin : auto;
+    overflow: hidden;
   }
 
   .foto-register img{
-    width: 60%;
-    height: 60%;
+    max-width: 100%;
+    height: auto;
   }
   
   .login-form label{
