@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { NavLink, Routes, Route } from 'react-router-dom'; // Import Route
 import NavbarComponent from '../../components/NavbarComponent';
 import FooterComponent from '../../components/FooterComponent';
-import WarungDetail from './detailWarung';
+import WarungDetail from './detail';
 import './warung.css';
 
 class Warung extends Component {
