@@ -25,6 +25,11 @@ class Detail extends React.Component {
                     name: 'WARUNG 03',
                     image: '/image/warung/warung 03.jpeg',
                 },
+                {
+                    idWarung: 3,
+                    name: 'WARUNG 03',
+                    image: '/image/warung/warung 03.jpeg',
+                },
                 // Tambahkan makanan lain sesuai kebutuhan
             ],
             selectedwarungs: [],
@@ -52,7 +57,7 @@ class Detail extends React.Component {
                     <div className='detail-kategori'>
                         <ul className='kategori'>
                             <li className='makanan'>Makanan</li>
-                            <li classname='minuman'>Minuman</li>
+                            <li className='minuman'>Minuman</li>
                         </ul>
                     </div>
 

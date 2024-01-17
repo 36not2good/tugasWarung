@@ -4,6 +4,7 @@ import Beranda from "./pages/home";
 import PageMakanan from "./pages/makanan/makanan";
 import PageMinuman from "./pages/minuman/minuman";
 import PageWarung from "./pages/warung/warung";
+import Keranjang from "./pages/keranjang/keranjang";
 import DetailWarung from "./pages/warung/detail";
 import PageLogin from "./pages/login";
 import PageRegister from "./pages/Register";
@@ -25,6 +26,7 @@ function App() {
             <Route path="/makanan" element={<PageMakanan />} />
             <Route path="/minuman" element={<PageMinuman />} />
             <Route path="/warung" element={<PageWarung />} />
+            <Route path="/keranjang" element={<Keranjang />} />
             <Route path="/warung/:id" element={<DetailWarung/>} />
             <Route path="/dashboard" element={<Dashboard />} />
           </Routes>

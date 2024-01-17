@@ -1,7 +1,7 @@
 import React from 'react';
 import "./navbar.css";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCaretDown } from '@fortawesome/free-solid-svg-icons';
+import { faCaretDown, faCartShopping } from '@fortawesome/free-solid-svg-icons';
 
 class NavbarComponent extends React.Component {
   constructor(props) {
@@ -38,6 +38,7 @@ class NavbarComponent extends React.Component {
             </ul>
           </li>
           <li className="logout"><a href="/">Log out</a></li>
+          <li className="cart"><a href="/keranjang"><FontAwesomeIcon icon={faCartShopping} /></a></li>
         </ul>
       </div>
     );

@@ -38,6 +38,7 @@
   text-decoration: none;
   color: black;
   margin-bottom: 20px;
+  transition: transform 0.3s ease;
 }
 
 .warung-card:hover {
