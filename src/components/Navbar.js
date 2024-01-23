@@ -25,7 +25,7 @@ class Navbar extends React.Component {
         <div className="logo">Canteen</div>
         <h3>owner</h3></div>
         <ul className="nav-links">
-          <li className="home"><a href="/dashboard" className="active-page">Home</a></li>
+          <li className="home"><a href="/dashboard" >Home</a></li>
           <li className="warung"><a href="/notifikasi">notifikasi</a></li>
         <li className="logout"><a href="/">Log out</a></li>
         </ul>

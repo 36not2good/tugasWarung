@@ -1,32 +1,50 @@
 // Dashboard.js
-import React, { useState, useEffect } from 'react';
-import Navbar from '../../components/Navbar';
-import FooterComponent from '../../components/FooterComponent';
-import { useAuth } from '../../context/AuthContext';
+import React, { useState, useEffect, Component } from "react";
+import Navbar from "../../components/Navbar";
+import FooterComponent from "../../components/FooterComponent";
+import TabelData from "../../components/tabel/Tabel";
+import { useAuth } from "../../context/AuthContext";
 
-import './dashboard.css';
+import "./dashboard.css";
 
-export default function Dashboard() {
-  const { loggedInOwner } = useAuth();
-  const [warungName, setWarungName] = useState('');
-
-  useEffect(() => {
-    // Periksa apakah ada pemilik yang sedang login
-    if (loggedInOwner) {
-      // Akses nama warung langsung dari data pemilik
-      const warungName = loggedInOwner.owners.nama || '';
-      setWarungName(warungName);
-    }
-  }, [loggedInOwner]); // Menjalankan kembali efek ketika loggedInOwner berubah
-
-  return (
-    <div>
-      <Navbar />
-      <div className="container">
-        <h1>Selamat datang di {warungName}!</h1>
-        {/* Konten lain dari dasbor */}
+export default class Dashboard extends Component {
+  render() {
+    return (
+      <div>
+        <Navbar />
+        <div className="wadah-tabel">
+          <div className="container-tabel">
+            <h1>Warung selena </h1>
+            <div className="kosong">
+              <div className="daftar">
+                <h2>Daftar menu</h2>
+                <button>Tambah menu</button>
+              </div>
+            </div>
+            <div className="display-tabel">
+              <TabelData />
+              <div className="kategori-tabel">
+                <table className="tabel-kategorii">
+                  <thead>
+                    <tr>
+                      <th>Kategori</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>Makanan</td>
+                    </tr>
+                    <tr>
+                      <td>Minuman</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+          <FooterComponent />
+        </div>
       </div>
-      <FooterComponent />
-    </div>
-  );
+    );
+  }
 }

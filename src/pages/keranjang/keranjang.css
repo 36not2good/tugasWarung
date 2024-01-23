@@ -1,13 +1,15 @@
 .keranjang-container {
     display: flex;
+    flex-direction: row;
     height: auto;
     width: 100%;
     flex: 1;
     position: relative;
     cursor: default;
+    margin-top: 10px;
   }
 
-  .keranjang-content{
+  .keranjang-content h2{
     font-weight: normal;
   font-size: 2em;
   font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
@@ -15,12 +17,10 @@
 
   .keranjang-content{
     display: flex;
-  flex-wrap: wrap;
-  padding-inline: 10px;
-  overflow-x: auto;
-  flex-shrink: 0;
-  }
-
+    flex-direction: column;
+    width: 75%;
+  }  
+  
   .keranjang-judul{
     display: flex;
   flex-wrap: wrap;
@@ -30,25 +30,22 @@
   }
   
   .menu-container {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  max-width: 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    max-width: 100%;
   }
   
   .card-menu {
-    border-radius: 5px;
-    transition: transform 0.3s ease;
-    margin: 10px;
-    cursor: pointer;
-    align-items: center;
-    width: 250px;
-    height: 190px;
-    box-shadow: 1px 2px 2px 2px #d9d9d9;
-    flex-basis: calc(25% - 20px);
-    flex-shrink: 0;
-    max-width: calc(50% - 20px);
+  border-radius: 5px;
+  transition: transform 0.3s ease;
+  margin: 10px;
+  height: 200px;
+  cursor: pointer;
+  max-width: calc(25% - 20px);
+  box-shadow: 1px 2px 2px 2px #d9d9d9;
   }
+
 
   .card-menu:hover{
     transform: scale(1.05);
@@ -96,9 +93,17 @@
   
   .detail-pembayaran {
     display: flex;
-    flex-wrap: wrap;
-    min-width: 350px;
-    margin-right: 10px;
+  flex-direction: column;
+  width: auto;
+  flex-wrap: wrap;
+  min-width: 350px;
+  margin-right: 10px;
+
+/*     
+  flex-basis: calc(30% - 20px);
+  text-align: center;
+  margin-left: 10px; */
+  
   }
   
   .detail-pembayaran h2{
@@ -114,7 +119,7 @@
     height: 68vh;
     color: #000000;
     cursor: pointer;
-    margin-top: 20px
+    margin-top: 20px;
   }
   
   .detail-item {
@@ -143,9 +148,11 @@
   }
   
   .total-harga {
-    margin-top: 5px;
+    margin-top: 10px;
     font-size: 1.em;
     font-weight: normal;
+    /* flex-basis: calc(30% - 20px); /* Adjust the width of the total section */
+    /* text-align: left; */
   }
 
   .cart-button{
@@ -160,46 +167,127 @@
     cursor: pointer;
     font-weight: bold;
   }
-  
-  .popup {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.5);
+
+  .popup {    
     display: flex;
+    position: fixed;
     justify-content: center;
     align-items: center;
+    top: 0;
+    left: 0;
+    background: rgba(0, 0, 0, 0.5);
+    width: 100%;
+    height: 100%;
+    /* /* -webkit-backdrop-filter: drop-shadow(10%);
+    backdrop-filter: blur(5px); */
   }
   
-  .popup-content {
+  .popup-content{
     background: #fff;
     padding: 20px;
+    border: none;
+    box-shadow: 1px 2px 2px 2px #d9d9d9;
     border-radius: 5px;
-    position: relative;
+    width: 20vw;
+    height: 50vh;
   }
   
-  .popup-close {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    font-size: 20px;
-    cursor: pointer;
+  
+  .popup h3{
+    text-align: center;
+    font-size: 1.7em;
   }
   
-  .popup-detail {
-    display: flex;
-    gap: 20px;
+  .section{
+    margin-top: 20px; 
   }
   
-  .popup-quantity {
-    display: flex;
-    gap: 5px;
+  .popup button{
+    background-color: white;
   }
   
-  .popup-total-harga {
+  .kuantitas-container button{
+    border-radius: 3px;
+    border: 1px solid black;
+    width: 1.6vw;
+  }
+  
+  .popup label {
+    display: block;
+    margin-bottom: 5px; 
+    margin-top: 15px;
+  }
+  
+  .kuantitas-container span{
+    padding: 25px;
+  }
+  
+  .section textarea{
+    border-radius: 5px;
+    border: none;
+    background-color: #d9d9d9;
+    resize: none;
+    max-height: 15vh;
+    overflow: auto;
+    height: 15vh;
+    width: 20vw;
+  }
+  
+  
+  .price h4{
     margin-top: 10px;
-    font-weight: bold;
   }
   
+  
+  .popup-button {
+    text-align: right;
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+  
+  .popup-button button {
+    border-radius: 5px;
+    margin-left: 5px; 
+    height: 4vh;
+  }
+
+  @media only screen and (max-width: 768px) {
+    .detail-pembayaran {
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      margin-right: 0;
+      min-width: unset;
+    }
+  
+    .detail-pembayaran > * {
+      width: 100%; 
+      max-width: 100%; 
+      box-sizing: border-box; 
+    }
+  
+    .detail-pembayaran h2 {
+      margin-bottom: 10px;
+    }
+  
+    .card-menu {
+      flex-basis: calc(50% - 20px); 
+      max-width: calc(100% - 20px); 
+    }
+    
+    .menu-title h3 {
+      font-size: 2vh; 
+    }
+  
+    .menu-info p {
+      font-size: 0.9em; 
+    }
+  
+    .menu-info h4 {
+      font-size: 1em; 
+    }
+  
+    .pay-button{
+      width: 100%;
+    }
+  }

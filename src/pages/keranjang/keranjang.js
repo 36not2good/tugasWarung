@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import Swal from 'sweetalert2';
-import NavbarComponent from "../../components/NavbarComponent";
-import FooterComponent from "../../components/FooterComponent";
-import "./keranjang.css";
+import NavbarComponent from '../../components/NavbarComponent';
+import FooterComponent from '../../components/FooterComponent';
+import './keranjang.css';
 import { numberWithCommas } from '../../utils/utils';
 
 class Keranjang extends React.Component {
@@ -13,51 +13,77 @@ class Keranjang extends React.Component {
       menus: [
         {
           id: 1,
-          name: 'Nasi Goreng',
+          name: 'Jus Buah',
           origin: 'warung 01',
           price: 15000,
           image: '/image/keranjang/juss.jpeg',
         },
         {
           id: 2,
-          name: 'Bakso',
+          name: 'Seblak',
           origin: 'warung 02',
           price: 15000,
-          image: '/image/keranjang/seblakk.jpeg'
+          image: '/image/keranjang/seblakk.jpeg',
+        },
+        {
+          id: 2,
+          name: 'Seblak',
+          origin: 'warung 02',
+          price: 15000,
+          image: '/image/keranjang/seblakk.jpeg',
+        },
+        {
+          id: 2,
+          name: 'Seblak',
+          origin: 'warung 02',
+          price: 15000,
+          image: '/image/keranjang/seblakk.jpeg',
+        },
+        {
+          id: 2,
+          name: 'Seblak',
+          origin: 'warung 02',
+          price: 15000,
+          image: '/image/keranjang/seblakk.jpeg',
         },
         // Tambahkan makanan lain sesuai kebutuhan
       ],
-      selectedmenus: [],
+      selectedMenus: [],
       totalHarga: 0,
-      editingmenu: null,
+      editingMenu: null,
       editQuantity: 0,
       editNote: '',
     };
   }
 
-  handlemenuClick = (menu) => {
-    const { selectedmenus, totalHarga, quantity } = this.state;
-    const existingmenu = selectedmenus.find((selectedmenu) => selectedmenu.id === menu.id);
-
-    if (existingmenu) {
-      const updatedmenus = selectedmenus.map((selectedmenu) =>
-        selectedmenu.id === menu.id
-          ? { ...selectedmenu, quantity: selectedmenu.quantity + 1, subtotalPrice: selectedmenu.quantity * menu.price }
-          : selectedmenu
+  handleMenuClick = (menu) => {
+    const { selectedMenus, totalHarga, editQuantity } = this.state;
+    const existingMenu = selectedMenus.find((selectedMenu) => selectedMenu.id === menu.id);
+  
+    if (existingMenu) {
+      const updatedMenus = selectedMenus.map((selectedMenu) =>
+        selectedMenu.id === menu.id
+          ? {
+              ...selectedMenu,
+              quantity: selectedMenu.quantity + 1,
+              subTotalPrice: selectedMenu.subTotalPrice + menu.price,
+            }
+          : selectedMenu
       );
-
-      this.setState({
-        selectedmenus: updatedmenus,
-        totalHarga: totalHarga + menu.price,
-        subtotalPrice: quantity * menu.price,
-      });
-    } else {
-      const newmenu = { ...menu, quantity: 1, totalPrice: menu.price };
+  
       this.setState((prevState) => ({
-        selectedmenus: [...prevState.selectedmenus, newmenu],
+        selectedMenus: updatedMenus,
         totalHarga: prevState.totalHarga + menu.price,
+        editQuantity: prevState.editQuantity + 1,
       }));
-
+    } else {
+      const newMenu = { ...menu, quantity: 1, subTotalPrice: menu.price }; // Ganti totalPrice dengan subTotalPrice
+      this.setState((prevState) => ({
+        selectedMenus: [...prevState.selectedMenus, newMenu],
+        totalHarga: prevState.totalHarga + menu.price,
+        editQuantity: prevState.editQuantity + 1,
+      }));
+  
       Swal.fire({
         position: 'center',
         icon: 'success',
@@ -69,27 +95,32 @@ class Keranjang extends React.Component {
   };
 
   calculateTotal = (menuList) => {
-    return menuList.reduce((total, menu) => total + menu.totalPrice, 0);
+    return menuList.reduce((total, menu) => total + menu.subTotalPrice, 0);
   };
 
-  handleSelectedmenuClick = (selectedmenu) => {
+  handleSelectedMenuClick = (selectedMenu) => {
     this.setState({
-      editingmenu: selectedmenu,
-      editQuantity: selectedmenu.quantity,
-      editNote: selectedmenu.note || '',
+      editingMenu: selectedMenu,
+      editQuantity: selectedMenu.quantity,
+      editNote: selectedMenu.note || '',
     });
   };
 
   handleEditMenu = () => {
-    const { selectedmenus, editingmenu, editQuantity, editNote } = this.state;
+    const { selectedMenus, editingMenu, editQuantity, editNote } = this.state;
   
-    const updatedmenus = selectedmenus.map((selectedmenu) =>
-      selectedmenu.id === editingmenu.id
-        ? { ...selectedmenu, quantity: editQuantity, note: editNote, totalPrice: selectedmenu.price * editQuantity }
-        : selectedmenu
+    const updatedMenus = selectedMenus.map((selectedMenu) =>
+      selectedMenu.id === editingMenu.id
+        ? {
+            ...selectedMenu,
+            quantity: editQuantity,
+            note: editNote,
+            subTotalPrice: editingMenu.price * editQuantity, // Update to subTotalPrice
+          }
+        : selectedMenu
     );
   
-    const newTotalHarga = this.calculateTotal(updatedmenus);
+    const newTotalHarga = this.calculateTotal(updatedMenus);
   
     Swal.fire({
       position: 'center',
@@ -100,37 +131,37 @@ class Keranjang extends React.Component {
     });
   
     this.setState({
-      selectedmenus: updatedmenus,
-      totalHarga: newTotalHarga, 
-      editingmenu: null,
+      selectedMenus: updatedMenus,
+      totalHarga: newTotalHarga,
+      editingMenu: null,
     });
   };
   
 
   closeEditPopup = () => {
     this.setState({
-      editingmenu: null,
+      editingMenu: null,
     });
   };
 
   handleDeleteMenu = () => {
-    const { selectedmenus, editingmenu } = this.state;
+    const { selectedMenus, editingMenu } = this.state;
 
-    const updatedmenus = selectedmenus.filter((selectedmenu) => selectedmenu.id !== editingmenu.id);
+    const updatedMenus = selectedMenus.filter((selectedMenu) => selectedMenu.id !== editingMenu.id);
 
-    const newTotalHarga = this.calculateTotal(updatedmenus);
+    const newTotalHarga = this.calculateTotal(updatedMenus);
 
     this.setState({
-      selectedmenus: updatedmenus,
+      selectedMenus: updatedMenus,
       totalHarga: newTotalHarga,
-      editingmenu: null,
+      editingMenu: null,
     });
   };
 
   handlePayOrder = () => {
-    const { selectedmenus, totalHarga } = this.state;
+    const { selectedMenus, totalHarga } = this.state;
 
-    if (selectedmenus.length === 0) {
+    if (selectedMenus.length === 0) {
       Swal.fire({
         position: 'center',
         icon: 'error',
@@ -141,7 +172,7 @@ class Keranjang extends React.Component {
       return;
     }
 
-    console.log('Makanan yang dibeli:', selectedmenus);
+    console.log('Makanan yang dibeli:', selectedMenus);
     console.log('Total Harga:', totalHarga);
 
     Swal.fire({
@@ -154,20 +185,20 @@ class Keranjang extends React.Component {
     });
 
     this.setState({
-      selectedmenus: [],
+      selectedMenus: [],
       totalHarga: 0,
     });
   };
 
   render() {
-    const { menus, selectedmenus, totalHarga, editingmenu, editQuantity, editNote } = this.state;
+    const { menus, selectedMenus, totalHarga, editingMenu, editQuantity, editNote } = this.state;
 
     return (
       <div>
         <NavbarComponent />
         <div className="keranjang-container">
           <div className="keranjang-content">
-            <div className='keranjang-judul'>
+            <div className="keranjang-judul">
               <h2>Keranjang</h2>
             </div>
             <div className="menu-container">
@@ -175,10 +206,10 @@ class Keranjang extends React.Component {
                 <div
                   className="card-menu"
                   key={menu.id}
-                  onClick={() => this.handlemenuClick(menu)}
+                  onClick={() => this.handleMenuClick(menu)}
                 >
-                  <div className='menu-img-container'>
-                    <img src={menu.image} alt={menu.name} className='menu-img'/>
+                  <div className="menu-img-container">
+                    <img src={menu.image} alt={menu.name} className="menu-img" />
                   </div>
                   <div className="menu-info">
                     <div className="menu-title">
@@ -195,47 +226,72 @@ class Keranjang extends React.Component {
           <div className="detail-pembayaran">
             <h2>Detail Pembayaran</h2>
             <div className="card-detail-pembayaran">
-              {selectedmenus.map((selectedmenu) => (
-                <div key={selectedmenu.id} className="detail-item " onClick={() => this.handleSelectedmenuClick(selectedmenu)}>
-                  <p>{selectedmenu.name} ({selectedmenu.quantity}) </p>
-                  <h5>Rp {selectedmenu.subtotalPrice}</h5>
+              {selectedMenus.map((selectedMenu) => (
+                <div
+                  key={selectedMenu.id}
+                  className="detail-item "
+                  onClick={() => this.handleSelectedMenuClick(selectedMenu)}
+                >
+                  <p>{`${selectedMenu.name} (${selectedMenu.quantity})`}</p>
+                  <h5>{`Rp ${numberWithCommas(selectedMenu.subTotalPrice)}`}</h5>
                 </div>
               ))}
             </div>
             <div className="total-harga">
               <span>Total Harga:</span>
-              <span>{`Rp ${totalHarga}`}</span>
+              <span>{`Rp ${numberWithCommas(totalHarga)}`}</span>
             </div>
-            <button className='cart-button' onClick={this.handlePayOrder}>Bayar</button>
+            <button className="cart-button" onClick={this.handlePayOrder}>
+              Bayar
+            </button>
           </div>
+          
+          
 
-          {editingmenu && (
-            <div className='popup'>
-              <div className='popup-content'>
-                <h3>{editingmenu.name}</h3>
+          {editingMenu && (
+            <div className="popup">
+              <div className="popup-content">
+                <h3>{editingMenu.name}</h3>
                 <label>Jumlah Pesanan:</label>
                 <div className="kuantitas-container">
-                  <button onClick={() => this.setState({ editQuantity: Math.max(1, editQuantity - 1) })}>-</button>
+                  <button onClick={() => this.setState({ editQuantity: Math.max(1, editQuantity - 1) })}>
+                    -
+                  </button>
                   <span>{editQuantity}</span>
                   <button onClick={() => this.setState({ editQuantity: editQuantity + 1 })}>+</button>
                 </div>
-                <div className='section'>
+                <div className="section">
                   <label>Catatan Pesanan:</label>
-                  <textarea value={editNote} onChange={(e) => this.setState({ editNote: e.target.value })} placeholder='Tuliskan catatan anda disini' />
+                  <textarea
+                    value={editNote}
+                    onChange={(e) => this.setState({ editNote: e.target.value })}
+                    placeholder="Tuliskan catatan anda disini"
+                  />
                 </div>
-                <div className='price'>
+                <div className="price">
                   <label>Total Harga: </label>
-                  <h4>Rp {numberWithCommas(editingmenu.price * editQuantity)}</h4>
+                  <h4>{`Rp ${numberWithCommas(editingMenu.price * editQuantity)}`}</h4>
                 </div>
-                <div className='popup-button'>
-                  <button onClick={this.handleEditMenu} style={{ color: '#7749F8', border: ' 2px solid #7749F8', cursor: 'pointer' }}>Simpan</button>
-                  <button onClick={this.handleDeleteMenu} style={{ color: '#DC3545', border: ' 2px solid #DC3545', cursor: 'pointer' }}>Hapus</button>
-                  <button onClick={this.closeEditPopup} style={{ cursor: 'pointer' }}>Batal</button>
+                <div className="popup-button">
+                  <button
+                    onClick={this.handleEditMenu}
+                    style={{ color: '#7749F8', border: ' 2px solid #7749F8', cursor: 'pointer' }}
+                  >
+                    Simpan
+                  </button>
+                  <button
+                    onClick={this.handleDeleteMenu}
+                    style={{ color: '#DC3545', border: ' 2px solid #DC3545', cursor: 'pointer' }}
+                  >
+                    Hapus
+                  </button>
+                  <button onClick={this.closeEditPopup} style={{ cursor: 'pointer' }}>
+                    Batal
+                  </button>
                 </div>
               </div>
             </div>
           )}
-
         </div>
         <FooterComponent />
       </div>
