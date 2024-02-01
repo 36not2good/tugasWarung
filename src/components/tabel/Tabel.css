@@ -1,7 +1,7 @@
 .tabel-wrapper {
-    width: 80%;
-    height: 100vh;
-    overflow-x: auto; /* Enable horizontal scrolling for the table */
+    width: 100%;
+    height: auto;
+    overflow-x: auto;
     margin: 20px 0;
 }
 
@@ -11,7 +11,7 @@
     box-shadow: 0px 10px 10px #ccc;
     white-space: nowrap;
     width: 72%;
-    max-width: 100%; /* Adjust to the full width of the container */
+    max-width: 100%;
     border-radius: 10px;
     overflow: hidden;
     margin-left: 30px;
