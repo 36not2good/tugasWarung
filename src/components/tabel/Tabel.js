@@ -88,11 +88,26 @@ class Tabel extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      data: props.data,
-      newItem: { nama: "", harga: 0, stok: 0 },
+      data: [], // Initialize with an empty array
+      newItem: { nama_menu: "", harga: "", stok: "", id_kategori:"", foto: ""},
       editItemId: null,
-      filteredData: props.data,
+      filteredData: [], // Initialize with an empty array
     };
+  }
+
+  componentDidMount() {
+    // Fetch data from the backend when the component mounts
+    this.fetchData();
+  }
+
+  async fetchData() {
+    try {
+      const response = await fetch("http://localhost:5000/products");
+      const data = await response.json();
+      this.setState({ data, filteredData: data });
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
   }
 
   componentDidUpdate(prevProps) {
@@ -118,12 +133,16 @@ class Tabel extends Component {
   };
 
   handleDelete = (id) => {
-    this.setState(
-      (prevState) => ({
-        data: prevState.data.filter((item) => item.id !== id),
-      }),
-      () => this.filterData()
-    );
+    // Make a DELETE request to the backend to delete the product
+    fetch(`http://localhost:5000/products/${id}`, {
+      method: "DELETE",
+    })
+      .then((response) => response.json())
+      .then(() => {
+        // After successful deletion, fetch data again
+        this.fetchData();
+      })
+      .catch((error) => console.error("Error deleting product:", error));
   };
 
   render() {
@@ -136,9 +155,10 @@ class Tabel extends Component {
             <tr>
               <th className="expand">No</th>
               <th>Nama</th>
-              <th className="expand">Kategori</th>
               <th>Harga</th>
               <th className="expand">Stok</th>
+              <th>Kategori</th>
+              <th>Foto</th>
               <th className="expand" colSpan={2}>
                 Aksi
               </th>
@@ -148,10 +168,11 @@ class Tabel extends Component {
             {filteredData.map((item) => (
               <tr key={item.id}>
                 <td>{item.id}</td>
-                <td>{item.nama}</td>
-                <td>{item.kategori}</td>
+                <td>{item.nama_menu}</td>
                 <td>{item.harga}</td>
                 <td>{item.stok}</td>
+                <td>{item.id_kategori}</td>
+                <td>{item.foto}</td>
                 <td className="aksi">
                   <span className="icon-wrapper">
                     <NavLink

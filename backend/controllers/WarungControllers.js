@@ -52,28 +52,49 @@ export const saveWarung = async (req, res) => {
 };
 
 
-export const updateWarung = async(req, res) => {
+export const updateWarung = async (req, res) => {
+    const warung = await Warung.findOne({
+        where: {
+            id: req.params.id
+        }
+    });
+
+    if (!warung) return res.status(404).json({ msg: "No Data Found" });
+
+    let fileName = "";
+
+    if (req.files === null) {
+        fileName = warung.foto_warung;
+    } else {
+        const file = req.files.foto_warung;
+        const fileSize = file.size;
+        const ext = path.extname(file.name);
+        fileName = `${Date.now().toString(36)}_${Math.random().toString(36).substring(2, 8)}${ext}`;
+        const allowedType = ['.png', '.jpg', '.jpeg'];
+
+        if (!allowedType.includes(ext.toLowerCase())) return res.status(422).json({ msg: "Invalid Images" });
+        if (fileSize > 5000000) return res.status(422).json({ msg: "Image must be less than 5 MB" });
+
+        const filepath = `./public/images/${warung.foto_warung}`;
+        fs.unlinkSync(filepath);
+
+        file.mv(`./public/images/${fileName}`, (err) => {
+            if (err) return res.status(500).json({ msg: err.message });
+        });
+    }
+
+    const name = req.body.nama_warung;
+    const url = `${req.protocol}://${req.get("host")}/images/${fileName}`;
+
     try {
-        const warung = await Warung.findOne({
+        await Warung.update({ nama_warung: name, id_warung: req.body.id_warung, foto_warung: fileName, url: url }, {
             where: {
                 id: req.params.id
             }
         });
-
-        if (!warung) {
-            return res.status(404).json({ msg: "warung not found" });
-        }
-
-        // Update warung properties based on your requirements
-        warung.nama_warung = req.body.nama_warung || warung.nama_warung;
-        warung.id_owner = req.body.id_owner || warung.id_owner;
-
-        // Save the updated warung
-        await warung.save();
-
-        res.status(200).json({ msg: "warung Updated Successfully", warung });
+        res.status(200).json({ msg: "Warung Updated Successfully" });
     } catch (error) {
-        console.error(error.message);
+        console.log(error.message);
         res.status(500).json({ msg: "Internal Server Error" });
     }
-}
+};

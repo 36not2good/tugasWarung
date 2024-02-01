@@ -108,11 +108,38 @@ class TambahMenu extends Component {
     }));
   };
 
-  handleSave = (e) => {
-    e.preventDefault(); // Prevent the default form submission
-    this.props.handleAdd(this.state.newItem);
-    this.props.history.push("/dashboard");
-  };
+  handleSave = async (e) => {
+    e.preventDefault();
+
+    const { nama, harga, stok, kategori } = this.state.newItem;
+
+    try {
+        // Send a POST request to the backend API to save the product
+        const response = await fetch("http://localhost:5000/products", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                nama_menu: nama,
+                harga: harga,
+                stok: stok,
+                id_kategori: kategori,
+                // Add other fields as needed
+            }),
+        });
+
+        const data = await response.json();
+
+        // Handle success or display an error message
+        console.log(data);
+
+        // Redirect to the dashboard or handle success as needed
+        this.props.history.push("/dashboard");
+    } catch (error) {
+        console.error("Error saving product:", error);
+    }
+};
 
   render() {
     const { newItem } = this.state;

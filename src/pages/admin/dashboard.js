@@ -13,28 +13,33 @@ export default class Dashboard extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      selectedCategory: null,
-      data: [
-        { id: 1, nama: "Makanan 1", kategori: "Makanan", harga: 10000, stok: 5 },
-        { id: 2, nama: "Makanan 2", kategori: "Makanan", harga: 15000, stok: 8 },
-        { id: 3, nama: "Makanan 3", kategori: "Makanan", harga: 20000, stok: 3 },
-        { id: 4, nama: "Minuman 1", kategori: "Minuman", harga: 5000, stok: 10 },
-        { id: 5, nama: "Minuman 2", kategori: "Minuman", harga: 8000, stok: 7 },
-      ],
+      selectedCategory: null, // Initialize selectedCategory to null
+      data: [], // Initialize data array with your data
     };
   }
 
-  handleAdd = (newItem) => {
-    this.setState((prevState) => ({
-      data: [
-        ...prevState.data,
-        {
-          ...newItem,
-          id: Math.max(...prevState.data.map((item) => item.id), 0) + 1,
-        },
-      ],
-    }));
-  };
+  handleAdd = async (newItem) => {
+    try {
+        // Send a POST request to the backend API to save the product
+        const response = await fetch("http://localhost:5000/products", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(newItem),
+        });
+
+        const data = await response.json();
+
+        // Handle success or display an error message
+        console.log(data);
+
+        // Fetch updated product list and update the state if needed
+        this.fetchProducts();
+    } catch (error) {
+        console.error("Error adding product:", error);
+    }
+};
 
   handleCategorySelect = (category) => {
     this.setState({ selectedCategory: category });
@@ -42,9 +47,13 @@ export default class Dashboard extends Component {
 
   filterDataByCategory = () => {
     const { data, selectedCategory } = this.state;
-    return selectedCategory
-      ? data.filter((item) => item.kategori === selectedCategory)
-      : data;
+
+    if (selectedCategory) {
+      return data.filter((item) => item.kategori === selectedCategory);
+    } else {
+      // If selectedCategory is null, return the entire data array
+      return data;
+    }
   };
 
 

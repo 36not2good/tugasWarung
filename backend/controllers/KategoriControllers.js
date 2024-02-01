@@ -16,7 +16,7 @@ export const getKategoriById = async (req, res) => {
     try {
         const response = await Kategori.findOne({
             where: {
-                id: req.params.id
+                id: req.params.id_kategori
             }
         });
         res.json(response)
