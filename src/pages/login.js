@@ -55,57 +55,36 @@ function Login() {
   
   const handleSubmit = async (event) => {
     event.preventDefault();
-    
+  
     if (!validateForm()) {
       return;
     }
   
     const { username, password } = formData;
-    console.log(formData);
+  
     try {
-      const response = await axios.get('http://localhost:3001/users');
-      console.log(response.data);
+      const response = await axios.get(`http://localhost:5000/user?username=${username}`);
+      
       if (response.status === 200) {
-        const userWithMatchingUsername = response.data.find(user => user.username === username);
-        const userWithMatchingPassword = response.data.find(user => user.password === password);
+        const user = response.data[0];
   
-        if (userWithMatchingUsername && userWithMatchingPassword) {
-          // Login successful
-          const matchingUser = response.data.find(user => user.username === username && user.password === password);
+        if (user && user.password === password) {
           alert('Login successful');
+          navigate('/beranda');
+
+          login(user);
   
-          // Call the login function from AuthContext
-          login(matchingUser);
-  
-          // Navigate based on user role          
-            if (matchingUser.role.role === 'user') {
-              navigate('/beranda');
-            } else if (matchingUser.role.role === 'admin') {
-              navigate('/dashboard');
-            }
+          if (user.id_role === '1') {
+            navigate('/beranda');
+          } if (user.id_role === '2') {
+            navigate('/dashboard');
+          }
         } else {
-          // Check if either username or password is incorrect
-          if (!userWithMatchingUsername) {
-            setErrorMessages({
-              username: 'Username is incorrect',
-            });
-          }
-  
-          if (!userWithMatchingPassword) {
-            setErrorMessages({
-              password: 'Password is incorrect',
-            });
-          }
-
-          if(!userWithMatchingUsername && !userWithMatchingPassword){
-            setErrorMessages({
-
-              password: 'Username and Password is incorrect',
-            });
-          }
+          setErrorMessages({
+            password: 'Username or password is incorrect',
+          });
         }
       } else {
-        
         alert('Login failed. Please check your credentials and try again');
       }
     } catch (error) {
@@ -113,6 +92,61 @@ function Login() {
       alert('An error occurred. Please try again.');
     }
   };
+  
+  
+  //   const { username, password } = formData;
+  //   console.log(formData);
+  //   try {
+  //     const response = await axios.get('http://localhost:3001/users');
+  //     console.log(response.data);
+  //     if (response.status === 200) {
+  //       const userWithMatchingUsername = response.data.find(user => user.username === username);
+  //       const userWithMatchingPassword = response.data.find(user => user.password === password);
+  
+  //       if (userWithMatchingUsername && userWithMatchingPassword) {
+  //         // Login successful
+  //         const matchingUser = response.data.find(user => user.username === username && user.password === password);
+  //         alert('Login successful');
+  
+  //         // Call the login function from AuthContext
+  //         login(matchingUser);
+  
+  //         // Navigate based on user role          
+  //           if (matchingUser.role.role === 'user') {
+  //             navigate('/beranda');
+  //           } else if (matchingUser.role.role === 'admin') {
+  //             navigate('/dashboard');
+  //           }
+  //       } else {
+  //         // Check if either username or password is incorrect
+  //         if (!userWithMatchingUsername) {
+  //           setErrorMessages({
+  //             username: 'Username is incorrect',
+  //           });
+  //         }
+  
+  //         if (!userWithMatchingPassword) {
+  //           setErrorMessages({
+  //             password: 'Password is incorrect',
+  //           });
+  //         }
+
+  //         if(!userWithMatchingUsername && !userWithMatchingPassword){
+  //           setErrorMessages({
+
+  //             password: 'Username and Password is incorrect',
+  //           });
+  //         }
+  //       }
+  //     } else {
+        
+  //       alert('Login failed. Please check your credentials and try again');
+  //     }
+  //   } catch (error) {
+  //     console.error('Error during login:', error);
+  //     alert('An error occurred. Please try again.');
+  //   }
+  // };
   
   
 
@@ -150,7 +184,7 @@ function Login() {
             />
             <p className="error-message">{errorMessages.password}</p>
           </div>
-          <button type="submit" className="login-button">
+          <button type="submit" className="login-button" onClick={handleSubmit}>
             Login now
           </button>
           <h5 className="register"><hr />Or<hr /></h5>

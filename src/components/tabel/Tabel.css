@@ -1,11 +1,18 @@
 .tabel-wrapper {
     width: 100%;
     height: auto;
-    overflow-x: auto;
+    overflow: hidden;
     margin: 20px 0;
 }
 
-.tabel {
+.tabel-content{
+    overflow-y: scroll;
+    /* max-height: 80%; */
+    height: 300px;
+    position: relative;
+}
+
+/* .tabel {
     table-layout: auto;
     border-collapse: collapse;
     box-shadow: 0px 10px 10px #ccc;
@@ -19,17 +26,24 @@
 
 .tabel thead {
     background-color: #ccc;
-    color: #222;
+  color: #222;
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
+th{
+    position: sticky;
+    top: 0px;
 }
 
 .tabel th,
 .tabel td {
     padding: 0.8rem;
+    border: 1px solid black;
 }
 
 .tabel td {
-    border-bottom: 0.5px solid #ddd;
-    border-right:  0.5px solid #ddd;
     overflow: hidden;
     text-overflow: ellipsis;
     text-align: center;
@@ -41,7 +55,65 @@
 
 .expand {
     width: 10%;
-}
+} */
+
+.tabel {
+    table-layout: auto;
+    border-collapse: collapse;
+    box-shadow: 0px 10px 10px #ccc;
+    white-space: nowrap;
+    width: 72%;
+    max-width: 100%;
+    border-radius: 10px;
+    overflow: hidden;
+    margin-left: 30px;
+  }
+  
+  .tabel thead {
+    background-color: #ccc;
+    color: #222;
+    position: sticky;
+    top: 0;
+    z-index: 1;
+  }
+  
+  .tabel th,
+  .tabel td {
+    padding: 0.8rem;
+    border: 1px solid black;
+    box-sizing: border-box; /* Include padding and border in element width */
+  }
+  
+  .tabel td {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-align: center;
+  }
+  
+  .tabel tbody tr:hover {
+    background-color: #eee;
+  }
+  
+  .tabel th {
+    position: sticky;
+    top: 0;
+    background-color: #ccc;
+    z-index: 1; /* Ensure the header cells are above the table body cells */
+  }
+  
+  .tabel th::before {
+    content: "";
+    left: 0;
+    height: 100%;
+    position: absolute;
+    background-color: #ccc;
+    z-index: -1; /* Place the before pseudo-element behind the table header cells */
+  }
+  
+  .expand {
+    width: 10%;
+  }
+  
 
 .label {
     border-radius: 3px;
@@ -63,7 +135,6 @@
 
 
 .aksi {
-    display: flex;
     justify-content: space-around;
 }
 
@@ -74,3 +145,22 @@
 .delete-button {
     color: #e10d05;
 }
+
+
+.table-image {
+  width: 50px; /* Set the desired width */
+  height: auto; /* Maintain aspect ratio */
+}
+
+
+
+
+
+
+
+
+
+
+
+
+

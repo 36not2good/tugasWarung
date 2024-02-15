@@ -9,7 +9,8 @@ import DetailWarung from "./pages/warung/detail";
 import PageLogin from "./pages/login";
 import PageRegister from "./pages/Register";
 import Dashboard from "./pages/admin/dashboard";
-import PageTambah from "./pages/tambah/TambahMenu"
+import PageTambah from "./pages/tambah/TambahMenu";
+import PageEdit from "./pages/edit/EditMenu";
 import { AuthProvider } from './context/AuthContext';
 
 function App() {
@@ -31,6 +32,7 @@ function App() {
             <Route path="/warung/:id" element={<DetailWarung/>} />
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/add" element={<PageTambah />} />
+            <Route path="/edit/:id" element={<PageEdit />} />
           </Routes>
         </AuthProvider>
       </div>

@@ -20,6 +20,7 @@ export default class Dashboard extends Component {
 
   handleAdd = async (newItem) => {
     try {
+      console.log('handleAdd function called');
         // Send a POST request to the backend API to save the product
         const response = await fetch("http://localhost:5000/products", {
             method: "POST",
@@ -41,6 +42,20 @@ export default class Dashboard extends Component {
     }
 };
 
+componentDidMount() {
+  this.fetchProducts();
+}
+
+fetchProducts = async () => {
+  try {
+    const response = await fetch('http://localhost:5000/products');
+    const data = await response.json();
+    this.setState({ data });
+  } catch (error) {
+    console.error('Error fetching data:', error);
+  }
+};
+
   handleCategorySelect = (category) => {
     this.setState({ selectedCategory: category });
   };
@@ -51,14 +66,13 @@ export default class Dashboard extends Component {
     if (selectedCategory) {
       return data.filter((item) => item.kategori === selectedCategory);
     } else {
-      // If selectedCategory is null, return the entire data array
       return data;
     }
   };
 
 
   render() {
-    const { selectedCategory } = this.state;
+    const { selectedCategory, data } = this.state;
 
     return (
       <div>
@@ -73,7 +87,7 @@ export default class Dashboard extends Component {
               </div>
             </div>
             <div className="display-tabel">
-              <TabelData data={this.filterDataByCategory()}
+              <TabelData data ={this.filterDataByCategory()}
                 selectedCategory={selectedCategory}
                 />
               <div className="kategori-tabel">

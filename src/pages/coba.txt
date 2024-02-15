@@ -1,0 +1,131 @@
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import { useParams, useNavigate } from "react-router-dom";
+
+const EditProduct = () => {
+  const [nama_menu, setNamaMenu] = useState("");
+  const [harga, setHarga] = useState("");
+  const [stok, setStok] = useState("");
+  const [id_kategori, setIdKategori] = useState("");
+  const [foto, setFoto] = useState("");
+  const [preview, setPreview] = useState("");
+  const { id } = useParams();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    getProductById();
+  }, []);
+
+  const getProductById = async () => {
+    const response = await axios.get(`http://localhost:5000/products/${id}`);
+    setNamaMenu(response.data.nama_menu);
+    setHarga(response.data.harga);
+    setStok(response.data.stok);
+    setIdKategori(response.data.id_kategori);
+    setFoto(response.data.foto);
+    setPreview(response.data.url);
+  };
+
+  const loadImage = (e) => {
+    const foto = e.target.files[0];
+    setFile(image);
+    setPreview(URL.createObjectURL(foto));
+  };
+
+  const updateProduct = async (e) => {
+    e.preventDefault();
+    const formData = new FormData();
+      formData.append("nama_menu", nama);
+      formData.append("harga", harga);
+      formData.append("stok", stok);
+      formData.append("id_kategori", id_kategori);
+      formData.append("foto", foto);
+    try {
+      await axios.patch(`http://localhost:5000/products/${id}`, formData, {
+        headers: {
+          "Content-type": "multipart/form-data",
+        },
+      });
+      navigate("/");
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  return (
+      <div className="Edit-container">
+        <Navbar />
+        <h1>WARUNG SARI RASA</h1>
+        <div className="Edit-menu-wrapper">
+          <div className="form-container-edit">
+            <div className="form-Edit">
+              <h2>Edit Menu</h2>
+              <form onSubmit={this.handleSave}>
+                <label>Nama:</label>
+                <div>
+                  <input
+                    type="text"
+                    name="nama"
+                    placeholder="masukkan nama menu"
+                    value={formData.nama_menu}
+                    onChange={(e) => setNamaMenu(e.target.value)}
+                  />
+                </div>
+                <label>Harga:</label>
+                <div>
+                  <input
+                    type="number"
+                    name="harga"
+                    placeholder="masukkan harga"
+                    value={formData.harga}
+                    onChange={(e) => setHarga(e.target.value)}
+                  />
+                </div>
+                <label>Stok:</label>
+                <div>
+                  <input
+                    type="number"
+                    name="stok"
+                    placeholder="masukkan jumlah stok"
+                    value={formData.stok}
+                    onChange={(e) => setStok(e.target.value)}
+                  />
+                </div>
+                <label>Kategori</label>
+                <div>
+                  <select
+                    name="kategori"
+                    value={formData.id_kategori}
+                    onChange={this.handleChange}
+                  >
+                    <option value="0">Pilih kategori</option>
+                    <option value="makanan">Makanan</option>
+                    <option value="minuman">Minuman</option>
+                  </select>
+                </div>
+                <label>Foto</label>
+                <div>
+                  <input
+                    type="file"
+                    name="foto"
+                    accept="image/*"
+                    onChange={this.handleChange}
+                  />
+                </div>
+                <button type="submit" className="btn-edit">
+                  Simpan
+                </button>
+                <NavLink to="/dashboard" className="btn-batal-edit">
+                  Batal
+                </NavLink>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+  );
+};
+
+export default EditProduct;
+
+

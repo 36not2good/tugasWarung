@@ -35,25 +35,27 @@
 }
 
 .tambah-btn{
+    padding: 10px 20px;
+    font-size: 18px;
+    font-weight: 500;
     display: flex;
-    flex-wrap: wrap;
     margin-top: 5.2vh;
-    background-color: #FF6E40;
-    width: auto;
-    height: fit-content;
-    border-radius: 5px;
-    border: 0;
+    margin-right: 20px;
     color: white;
-    font-size: large;
-    cursor: pointer;
-    text-align: center;
     text-decoration: none;
+    background-color: rgb(221, 130, 77);
+    text-align: center;
+    vertical-align: middle;
+    line-height: 1;
+    border-radius: 10px;
+    max-width: 200px;
+    transition: 0.25s;
+    cursor: pointer;
 
 }
 
 .tambah-btn:hover{
-    transition: all 0.5s;
-    background-color: #fc9e81;
+    box-shadow: 0px 1px 5px hsl(0, 20%, 5%);
 
 }
 
@@ -69,7 +71,6 @@
 .display-tabel{
     display: flex;
     flex-direction: row;
-    height: 100vh;
 }
 
 .kategori-tabel{

@@ -1,0 +1,14 @@
+GET http://localhost:5000/user
+
+
+POST http://localhost:5000/user
+Content-Type: application/json
+
+{
+    "nama":" abu",
+    "no_hp": "0987467857",
+    "username": "ubi1",
+    "password": "4567",
+    "id_role": "1",
+    "confPassword":"4567"
+}
