@@ -62,6 +62,7 @@ function Login() {
   
     const { username, password } = formData;
   
+    //seharusnya program ini berada di backend
     try {
       const response = await axios.get(`http://localhost:5000/user?username=${username}`);
       

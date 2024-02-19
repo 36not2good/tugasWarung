@@ -1,4 +1,5 @@
 import express from "express";
+import dotenv from "dotenv";
 import db from "./config/Database.js";
 import User from "./models/UserModel.js";
 import fileUpload from "express-fileupload";
@@ -8,6 +9,7 @@ import KategoriRoute from "./routes/KategoriRoute.js";
 import WarungRoute from "./routes/WarungRoute.js";
 import UserRoute from "./routes/UserRoute.js";
 import RoleRoute from "./routes/RoleRoute.js";
+dotenv.config();
 
 const app = express();
 

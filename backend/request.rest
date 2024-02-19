@@ -1,6 +1,6 @@
 GET http://localhost:5000/user
 
-
+###
 POST http://localhost:5000/user
 Content-Type: application/json
 
@@ -11,4 +11,13 @@ Content-Type: application/json
     "password": "4567",
     "id_role": "1",
     "confPassword":"4567"
+}
+
+###
+POST http://localhost:5000/login
+Content-Type: application/json
+
+{
+    "username": "ubi1",
+    "password" : "4567"
 }

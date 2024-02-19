@@ -89,6 +89,7 @@
 
 import User from "../models/UserModel.js";
 import bcrypt from "bcrypt";
+import jwt from "jsonwebtoken";
 
 export const getUser = async(req, res) => {
     try {
@@ -119,3 +120,83 @@ export const Register = async(req,res) =>{
         console.log(error);
     }
 }
+
+// export const Login = async(req,res) =>{
+//     try {
+//         const user = await User.findAll({
+//             where:{
+//                 username: req.body.username
+//             }
+//         });
+//         const match = await bcrypt.compare(req.body.password, user[0].password);
+//         if(!match) return res.status(400).json({msg: "wrong password"});
+//         const userId = user[0].id;
+//         const nama = user[0].nama;
+//         const username = user[0].username;
+//         const accessToken = jwt.sign({userId, nama, username}, process.env.ACCESS_TOKEN_SECRET,{
+//             expiresIn: '20s '
+//         });
+//         const refreshToken = jwt.sign({userId, nama, username}, process.env.REFRESH_TOKEN_SECRET,{
+//             expiresIn: '1d'
+//         });
+//         await User.update({refresh_token: refreshToken}, {
+//             where:{
+//                 id: userId
+//             }
+//         });
+//         res.cookies('refreshToken', refreshToken,{
+//             httponly: true,
+//             maxAge: 24 * 60 * 60 * 1000,   
+//         })
+//         res.json({ accessToken });
+//     } catch (error) {
+//         res.status(404).json({msg: "username tidak ditemukan"})
+//     }
+// }
+
+export const Login = async (req, res) => {
+    try {
+        const user = await User.findOne({
+            where: {
+                username: req.body.username
+            }
+        });
+
+        if (!user) {
+            return res.status(404).json({ msg: "Username not found" });
+        }
+
+        const match = await bcrypt.compare(req.body.password, user.password);
+        if (!match) {
+            return res.status(400).json({ msg: "Wrong password" });
+        }
+
+        const userId = user.id;
+        const nama = user.nama;
+        const username = user.username;
+
+        const accessToken = jwt.sign({ userId, nama, username }, process.env.ACCESS_TOKEN_SECRET, {
+            expiresIn: '20s'
+        });
+
+        const refreshToken = jwt.sign({ userId, nama, username }, process.env.REFRESH_TOKEN_SECRET, {
+            expiresIn: '1d'
+        });
+
+        await User.update({ refresh_token: refreshToken }, {
+            where: {
+                id: userId
+            }
+        });
+
+        res.cookie('refreshToken', refreshToken, {
+            httpOnly: true,
+            maxAge: 24 * 60 * 60 * 1000,
+        });
+
+        res.json({ accessToken });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ msg: "Internal Server Error" });
+    }
+};
