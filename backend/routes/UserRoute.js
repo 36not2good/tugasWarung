@@ -19,10 +19,10 @@
 
 import express from "express";
 import {getUser, Register, Login} from "../controllers/UserController.js";
-
+import { verifyToken } from "../middleware/verifyToken.js";
 const router = express.Router();
 
-router.get('/user', getUser);
+router.get('/user', verifyToken, getUser);
 router.post('/user', Register);
 router.post('/login', Login);
 

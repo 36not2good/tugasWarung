@@ -247,7 +247,7 @@ const Register = () => {
                 confPassword: confirmPassword,
                 id_role: id_role
             });
-            navigate("/");
+            navigate("/beranda");
         } catch (error) {
             if (error.response) {
                 setMsg(error.response.data.msg);

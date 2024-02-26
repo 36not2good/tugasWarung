@@ -1,16 +1,17 @@
 GET http://localhost:5000/user
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjUsIm5hbWEiOiIgYWJpIiwidXNlcm5hbWUiOiJhYmkxIiwiaWF0IjoxNzA4OTMwMzA5LCJleHAiOjE3MDg5MzAzMzl9.MPk4rNGuM_8MFJz0wG_ZqggZySjsyvcD_84_1-INe9I
 
 ###
 POST http://localhost:5000/user
 Content-Type: application/json
 
 {
-    "nama":" abu",
-    "no_hp": "0987467857",
-    "username": "ubi1",
-    "password": "4567",
+    "nama":" abi",
+    "no_hp": "0823456965",
+    "username": "abi1",
+    "password": "7654",
     "id_role": "1",
-    "confPassword":"4567"
+    "confPassword":"7654"
 }
 
 ###
@@ -18,6 +19,6 @@ POST http://localhost:5000/login
 Content-Type: application/json
 
 {
-    "username": "ubi1",
-    "password" : "4567"
+    "username": "abi1",
+    "password" : "7654"
 }

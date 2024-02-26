@@ -93,7 +93,9 @@ import jwt from "jsonwebtoken";
 
 export const getUser = async(req, res) => {
     try {
-        const user = await User.findAll();
+        const user = await User.findAll({
+            attributes: ['id', 'nama', 'username']
+        });
         res.json(user)
     } catch (error) {
         console.log(error);
@@ -174,12 +176,16 @@ export const Login = async (req, res) => {
         const userId = user.id;
         const nama = user.nama;
         const username = user.username;
+        const id_role = user.id_role;
+        // console.log(nama);
+        // console.log(process.env.ACCESS_TOKEN_SECRET);
+        // return res.status(400).json({ msg: "sampai disini" });
 
-        const accessToken = jwt.sign({ userId, nama, username }, process.env.ACCESS_TOKEN_SECRET, {
-            expiresIn: '20s'
+        const accessToken = jwt.sign({ userId, nama, username, id_role }, process.env.ACCESS_TOKEN_SECRET, {
+            expiresIn: '30s'
         });
 
-        const refreshToken = jwt.sign({ userId, nama, username }, process.env.REFRESH_TOKEN_SECRET, {
+        const refreshToken = jwt.sign({ userId, nama, username, id_role }, process.env.REFRESH_TOKEN_SECRET, {
             expiresIn: '1d'
         });
 
