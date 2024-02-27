@@ -232,10 +232,47 @@ const Register = () => {
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
     const [msg, setMsg] = useState('');
+    const [errorMessages, setErrorMessages] = useState({});
     const navigate = useNavigate();
+
+    // const isFormValid = () => {
+    //     return nama !== '' && no_hp !== '' && username !== '' && password !== '' && confirmPassword !== '';
+    // }
+
+    const validateInputs = () => {
+        const errors = {};
+        if (!nama.trim()) {
+            errors.nama = 'isi kolom nama';
+        }
+        if (!no_hp.trim()) {
+            errors.no_hp = 'isi kolom no hp';
+        }
+        if (!username.trim()) {
+            errors.username = 'isi kolom username';
+        }
+        if (!password.trim()) {
+            errors.password = 'isi kolom password';
+        }
+        if (!confirmPassword.trim()) {
+            errors.confirmPassword = 'konfirmasi ulang password';
+        } else if (password !== confirmPassword) {
+            errors.confirmPassword = 'Passwords tidak cocok';
+        }
+        setErrorMessages(errors);
+        return Object.keys(errors).length === 0;
+    };
 
     const handleRegister = async (e) => {
         e.preventDefault();
+        if (!validateInputs()) {
+            return;
+        }
+        
+        // if (!isFormValid()) {
+        //     setMsg('tolong isi semua kolom');
+        //     return;
+        // }
+
         try {
             const id_role = 1;
 
@@ -247,6 +284,7 @@ const Register = () => {
                 confPassword: confirmPassword,
                 id_role: id_role
             });
+
             navigate("/beranda");
         } catch (error) {
             if (error.response) {
@@ -275,6 +313,7 @@ const Register = () => {
                             className="login-input"
                             placeholder="Nama"
                         />
+                        {errorMessages.nama && <p className="error-message">{errorMessages.nama}</p>}
                         <label>Nomor Hp</label>
                         <input
                             type="number"
@@ -284,6 +323,7 @@ const Register = () => {
                             className="login-input"
                             placeholder="Nomor Hp"
                         />
+                        {errorMessages.no_hp && <p className="error-message">{errorMessages.no_hp}</p>}
                         <label>Username</label>
                         <input
                             type="text"
@@ -293,6 +333,7 @@ const Register = () => {
                             className="login-input"
                             placeholder="username"
                         />
+                        {errorMessages.username && <p className="error-message">{errorMessages.username}</p>}
                         <label>Password</label>
                         <input
                             type="password"
@@ -302,6 +343,7 @@ const Register = () => {
                             className="login-input"
                             placeholder="Password"
                         />
+                        {errorMessages.password && <p className="error-message">{errorMessages.password}</p>}
                         <label>Confirm Password</label>
                         <input
                             type="password"
@@ -311,12 +353,14 @@ const Register = () => {
                             className="login-input"
                             placeholder="Confirm password"
                         />
+                        {errorMessages.confirmPassword && <p className="error-message">{errorMessages.confirmPassword}</p>}
                     </div>
-                    <button type="submit" className="login-button">
+                    {msg && <p className="error-message">{msg}</p>}
+                    <button type="submit" className="login-button" onClick={handleRegister} >
                         Register Now
                     </button>
                     <h5 className="register"><hr />Or<hr /></h5>
-                    <button type="button" className="regist-button" onClick={handleLoginClick}>
+                    <button type="button" className="regist-button" onClick={handleLoginClick} >
                         Login Now
                     </button>
                 </form>
@@ -329,3 +373,4 @@ const Register = () => {
 }
 
 export default Register;
+

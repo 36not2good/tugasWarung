@@ -216,6 +216,7 @@ const Login = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [msg, setMsg] = useState('');
+  const [errorMessages, setErrorMessages] = useState({});
   const navigate = useNavigate();
 
   // const Auth = async (e) => {
@@ -233,32 +234,34 @@ const Login = () => {
   //     }
   // }
 
+  const validateInputs = () => {
+    const errors = {};
+    if (!username.trim()) {
+        errors.username = 'Username is required';
+    }
+    if (!password.trim()) {
+        errors.password = 'Password is required';
+    }
+    setErrorMessages(errors);
+    return Object.keys(errors).length === 0;
+};
+
   const Auth = async (e) => {
     e.preventDefault();
-    try {
-      const response = await axios.post('http://localhost:5000/login', {
-        username: username,
-        password: password
-      });
-  
-      // Assuming the role information is in response.data.role
-      const id_role = response.data.id_role;
-      
-      console.log('id_role:', id_role);
-
-      if (id_role === 1) {
-        // Navigate to beranda if id_role is 1
-        navigate("/beranda");
-      } else if(id_role === 2) {
-        // Handle other roles or show an error message
-        navigate("/dashboard");
-      }
-  
-    } catch (error) {
-      if (error.response) {
-        setMsg(error.response.data.msg);
-      }
+    if (!validateInputs()) {
+        return;
     }
+      try {
+          const response = await axios.post('http://localhost:5000/login', {
+              username: username,
+              password: password
+          });
+              navigate("/beranda");
+      } catch (error) {
+          if (error.response) {
+              setMsg(error.response.data.msg);
+          }
+      }
   }
 
   const handleRegisterClick = () => {
@@ -281,6 +284,7 @@ const Login = () => {
               className="login-input"
               placeholder="Username"
             />
+            {errorMessages.username && <p className="error-message">{errorMessages.username}</p>}
             <label>Password</label>
             <input
               type="password"
@@ -290,6 +294,7 @@ const Login = () => {
               className="login-input"
               placeholder="*****"
             />
+            {errorMessages.password && <p className="error-message">{errorMessages.password}</p>}
           </div>
           <button type="submit" className="login-button">
             Login now
