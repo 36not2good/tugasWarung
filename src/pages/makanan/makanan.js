@@ -16,24 +16,28 @@ export default class Makanan extends Component {
     this.state = {
       menus: [],
       selectedFoods: [],
-      totalHarga:0,
-      
+      totalHarga: 0,
+
     }
   }
 
 
   componentDidMount() {
-    axios.get(API_URL + "produks")
+    this.fetchMenuData();
+  }
+
+  fetchMenuData = () => {
+    axios.get(API_URL + "products", { params: { id_kategori: 1 } })  
       .then(res => {
-        const makananMenus = res.data.filter(menu => menu.kategoris.nama === "makanan");
-        console.log("cache data");
-        console.log(makananMenus);
-        this.setState({ menus: makananMenus });
+        this.setState({ menus: res.data });
       })
       .catch(error => {
-        console.log(error)
-      })
-  }
+        console.log(error);
+      });
+  };
+  
+  
+
 
   handleFoodClick = (food) => {
     const { selectedFoods } = this.state;
@@ -165,7 +169,7 @@ export default class Makanan extends Component {
   render() {
     console.log(this.state.menus)
     const { menus, selectedFoods, totalHarga, editingFood, editQuantity, editNote } = this.state;
-
+    const filteredMenus = menus.filter((food) => food.id_kategori === 1);
     return (
       <div className='judul-menu'>
         <NavbarComponent />
@@ -178,21 +182,21 @@ export default class Makanan extends Component {
             <div className='food-list'>
               <h2>Daftar Menu</h2>
               <div className='food-wrap'>
-                {menus.map((food) => (
+                {filteredMenus.map((food) => (
                   <div key={food.id} className='food-card' onClick={() => this.handleFoodClick(food)}>
                     <div className='food-image-container'>
                       <FontAwesomeIcon icon={faCircleInfo} className='icon-info' />
-                      <img src={`/image/makanan/${food.image}`} alt={food.nama} className='food-image' />
+                      <img src={food.url} alt={food.nama} className='food-image' />
                     </div>
                     <div className='food-details'>
                       <div className='food-name'>
-                        <h3>{food.nama}</h3>
-                        <p>{food.warungs.nama}</p>
+                        <h3>{food.nama_menu}</h3>
                       </div>
                       <h4>Rp {numberWithCommas(food.harga)}</h4>
                     </div>
                   </div>
                 ))}
+
               </div>
             </div>
           </div>
@@ -205,7 +209,7 @@ export default class Makanan extends Component {
                   className='selected-food'
                   onClick={() => this.handleSelectedFoodClick(selectedFood)}
                 >
-                  <p>{selectedFood.nama} ({selectedFood.quantity}) </p>
+                  <p>{selectedFood.nama_menu} ({selectedFood.quantity}) </p>
                   <h5>Rp {numberWithCommas(selectedFood.totalPrice)}</h5>
                 </div>
               ))}
@@ -222,7 +226,7 @@ export default class Makanan extends Component {
           {editingFood && (
             <div className='edit-popup'>
               <div className='edit-popup-content'>
-                <h3>{editingFood.nama}</h3>
+                <h3>{editingFood.nama_menu}</h3>
                 <label>Jumlah Pesanan:</label>
                 <div className="quantity-container">
                   <button onClick={() => this.setState({ editQuantity: Math.max(1, editQuantity - 1) })}>-</button>
