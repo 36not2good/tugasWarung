@@ -9,6 +9,7 @@ import KategoriRoute from "./routes/KategoriRoute.js";
 import WarungRoute from "./routes/WarungRoute.js";
 import UserRoute from "./routes/UserRoute.js";
 import RoleRoute from "./routes/RoleRoute.js";
+import OrderRoute from "./routes/OrderRoute.js"
 dotenv.config();
 
 const app = express();
@@ -22,6 +23,7 @@ app.use(KategoriRoute);
 app.use(WarungRoute);
 app.use(UserRoute);
 app.use(RoleRoute);
+app.use(OrderRoute);
 
 
 try {

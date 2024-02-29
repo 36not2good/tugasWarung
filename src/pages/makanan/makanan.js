@@ -137,9 +137,39 @@ export default class Makanan extends Component {
     });
   };
 
+  // handlePayOrder = () => {
+  //   const { selectedFoods } = this.state;
+
+  //   if (selectedFoods.length === 0) {
+  //     Swal.fire({
+  //       position: 'center',
+  //       icon: 'error',
+  //       title: 'Silakan pilih salah satu menu terlebih dahulu',
+  //       showConfirmButton: false,
+  //       timer: 1500,
+  //     });
+  //     return;
+  //   }
+
+
+  //   Swal.fire({
+  //     title: 'Pesanan Sukses',
+  //     text: 'Terima Kasih Sudah Memesan',
+  //     imageUrl: '/image/success.png',
+  //     imageWidth: 400,
+  //     imageHeight: 200,
+  //     imageAlt: 'Custom image',
+  //   });
+
+  //   this.setState({
+  //     selectedFoods: [],
+  //     totalHarga: 0,
+  //   });
+  // };
+
   handlePayOrder = () => {
     const { selectedFoods } = this.state;
-
+  
     if (selectedFoods.length === 0) {
       Swal.fire({
         position: 'center',
@@ -150,21 +180,46 @@ export default class Makanan extends Component {
       });
       return;
     }
-
-    Swal.fire({
-      title: 'Pesanan Sukses',
-      text: 'Terima Kasih Sudah Memesan',
-      imageUrl: '/image/success.png',
-      imageWidth: 400,
-      imageHeight: 200,
-      imageAlt: 'Custom image',
-    });
-
-    this.setState({
-      selectedFoods: [],
-      totalHarga: 0,
-    });
+  
+    const orderData = {
+      selectedFoods: selectedFoods.map(food => ({
+        nama_menu: food.nama_menu,
+        jumlah_pesanan: food.quantity,
+        harga_satuan: food.harga,
+        total_harga: food.totalPrice,
+        kategori_menu: food.kategori_menu,
+        foto_menu: food.url
+      }))
+    };
+  
+    axios.post('http://localhost:5000/orders', orderData)
+      .then(response => {
+        Swal.fire({
+          title: 'Pesanan Sukses',
+          text: 'Terima Kasih Sudah Memesan',
+          imageUrl: '/image/success.png',
+          imageWidth: 400,
+          imageHeight: 200,
+          imageAlt: 'Custom image',
+        });
+  
+        this.setState({
+          selectedFoods: [],
+          totalHarga: 0,
+        });
+      })
+      .catch(error => {
+        console.error(error);
+        Swal.fire({
+          position: 'center',
+          icon: 'error',
+          title: 'Terjadi kesalahan saat melakukan pesanan',
+          showConfirmButton: false,
+          timer: 1500,
+        });
+      });
   };
+  
 
   render() {
     console.log(this.state.menus)
