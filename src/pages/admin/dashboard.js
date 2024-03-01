@@ -21,54 +21,62 @@ export default class Dashboard extends Component {
   handleAdd = async (newItem) => {
     try {
       console.log('handleAdd function called');
-        // Send a POST request to the backend API to save the product
-        const response = await fetch("http://localhost:5000/products", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify(newItem),
-        });
+      // Send a POST request to the backend API to save the product
+      const response = await fetch("http://localhost:5000/products", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(newItem),
+      });
 
-        const data = await response.json();
+      const data = await response.json();
 
-        // Handle success or display an error message
-        console.log(data);
+      // Handle success or display an error message
+      console.log(data);
 
-        // Fetch updated product list and update the state if needed
-        this.fetchProducts();
+      // Fetch updated product list and update the state if needed
+      this.fetchProducts();
     } catch (error) {
-        console.error("Error adding product:", error);
+      console.error("Error adding product:", error);
     }
-};
+  };
 
-componentDidMount() {
-  this.fetchProducts();
-}
-
-fetchProducts = async () => {
-  try {
-    const response = await fetch('http://localhost:5000/products');
-    const data = await response.json();
-    this.setState({ data });
-  } catch (error) {
-    console.error('Error fetching data:', error);
+  componentDidMount() {
+    this.fetchProducts();
   }
-};
+
+  fetchProducts = async () => {
+    try {
+      const response = await fetch('http://localhost:5000/products');
+      const data = await response.json();
+      this.setState({ data });
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    }
+  };
 
   handleCategorySelect = (category) => {
-    this.setState({ selectedCategory: category });
+    this.setState({ selectedCategory: category }, () => {
+      this.fetchProducts();
+    });
   };
+  
 
   filterDataByCategory = () => {
     const { data, selectedCategory } = this.state;
-
+    console.log("Selected Category:", selectedCategory);
+    
     if (selectedCategory) {
-      return data.filter((item) => item.kategori === selectedCategory);
+      const filteredData = data.filter((item) => item.id_kategori === selectedCategory);
+      console.log("Filtered Data:", filteredData);
+      return filteredData;
     } else {
       return data;
     }
   };
+  
+
 
 
   render() {
@@ -87,9 +95,12 @@ fetchProducts = async () => {
               </div>
             </div>
             <div className="display-tabel">
-              <TabelData data ={this.filterDataByCategory()}
+              <TabelData
+                data={this.filterDataByCategory()}
                 selectedCategory={selectedCategory}
-                />
+                handleCategorySelect={this.handleCategorySelect} // Pass the method
+              />
+
               <div className="kategori-tabel">
                 <table className="tabel-kategorii">
                   <thead>
@@ -98,13 +109,17 @@ fetchProducts = async () => {
                     </tr>
                   </thead>
                   <tbody>
-                    <tr onClick={() => this.handleCategorySelect("Makanan")}>
+                  <tr onClick={() => this.handleCategorySelect(null)}>
+                      <td>semua</td>
+                    </tr>
+                    <tr onClick={() => this.handleCategorySelect(1)}>
                       <td>Makanan</td>
                     </tr>
-                    <tr onClick={() => this.handleCategorySelect("Minuman")}>
+                    <tr onClick={() => this.handleCategorySelect(2)}>
                       <td>Minuman</td>
                     </tr>
                   </tbody>
+
                 </table>
               </div>
             </div>
