@@ -168,7 +168,7 @@ export default class Makanan extends Component {
   // };
 
   handlePayOrder = () => {
-    const { selectedFoods } = this.state;
+    const { selectedFoods, editNote } = this.state;
   
     if (selectedFoods.length === 0) {
       Swal.fire({
@@ -187,7 +187,7 @@ export default class Makanan extends Component {
         jumlah_pesanan: food.quantity,
         harga_satuan: food.harga,
         total_harga: food.totalPrice,
-        kategori_menu: food.kategori_menu,
+        catatan: editNote,
         foto_menu: food.url
       }))
     };

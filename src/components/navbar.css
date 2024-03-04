@@ -159,23 +159,16 @@ body, h1, h2, h3, p, ul, li {
   }
   
   /* Styling untuk halaman yang sedang aktif */
-  .active-page {
-    border: 2px solid white;
-    background-color: rgb(175, 0, 0);
-    padding: 5px;
-    border-radius: 5px;
-  }
-  
-  /* Contoh halaman spesifik yang aktif */
-  .home.active-page {
-    background-color: #555;
-  }
-  
-  .warung.active-page {
-    background-color: #555;
-  }
-  
-  .kategori-menu.active-page {
-    background-color: #555;
-  }
-  
+.nav-links li.active {
+  border: 2px solid white;
+  background-color: rgb(175, 0, 0);
+  padding: 5px;
+  border-radius: 5px;
+}
+
+/* Contoh halaman spesifik yang aktif */
+.home.active,
+.warung.active,
+.kategori-menu.active {
+  background-color: #555;
+}
