@@ -7,7 +7,6 @@ const Order = db.define('order',{
     nama_menu: DataTypes.STRING,
     jumlah_pesanan: DataTypes.INTEGER,
     harga_satuan: DataTypes.INTEGER,
-    total_harga: DataTypes.INTEGER,
     catatan: DataTypes.STRING,
     foto_menu: DataTypes.STRING,
 },{

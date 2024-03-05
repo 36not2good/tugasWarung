@@ -33,7 +33,6 @@ export const saveOrder = async (req, res) => {
             nama_menu: req.body.selectedFoods.map(food => food.nama_menu).join(', '), 
             jumlah_pesanan: req.body.selectedFoods.map(food => food.jumlah_pesanan).join(', '),
             harga_satuan: req.body.selectedFoods.map(food => food.harga_satuan).join(', '),
-            total_harga: req.body.selectedFoods.map(food => food.total_harga).join(', '),
             catatan: req.body.selectedFoods.map(food => food.catatan).join(', '), 
             foto_menu: req.body.selectedFoods.map(food => food.foto_menu).join(', ')
         });

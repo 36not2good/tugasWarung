@@ -186,7 +186,6 @@ export default class Makanan extends Component {
         nama_menu: food.nama_menu,
         jumlah_pesanan: food.quantity,
         harga_satuan: food.harga,
-        total_harga: food.totalPrice,
         catatan: editNote,
         foto_menu: food.url
       }))
