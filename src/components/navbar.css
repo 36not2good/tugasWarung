@@ -76,6 +76,16 @@ body, h1, h2, h3, p, ul, li {
     border-radius: 8px;
   }
 
+  .riwayat{
+    font-family: 'Mukta', sans-serif;
+    transition: transform 0.3s ease;
+  }
+  .riwayat:hover{
+    background-color: #ff4545;
+    transform: scale(1.15);
+    border-radius: 8px;
+  }
+
   .dropdown-toggle{
     font-family: 'Mukta', sans-serif;
     transition: transform 0.3s ease;

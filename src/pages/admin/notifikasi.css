@@ -3,3 +3,87 @@
     width: 100vw;
     display: flex;
 }
+
+.konten-notifikasi{
+    margin-top: 5vh;
+    margin-left: 5vh;
+}
+
+.konten-notifikasi h2{
+    font-weight: normal;
+    font-size: 2em;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+
+.notifikasi-wrap{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    max-width: 100%;
+  }
+
+.notification-card {
+    border-radius: 5px;
+    transition: transform 0.3s ease;
+    margin: 10px;
+    cursor: pointer;
+    align-items: center;
+    width: 180px;
+    height: 130px;
+    box-shadow: 1px 2px 2px 2px #bbbbbb;
+    flex-basis: calc(25% - 20px);
+    flex-shrink: 0;
+    max-width: calc(50% - 20px);
+}
+
+.notification-card.terima{
+    margin-right: 10px;
+}
+
+.notification-buttons{
+    margin-left: 20px;
+    margin-top: 20px;
+}
+
+.notification-details{
+    margin-top: 10px;
+    margin-left: 20px;
+}
+
+.terima{
+    transition-duration: 0.4s;
+    text-decoration: none;
+    font-size: 15px;
+    border: none;
+    color: rgb(255, 255, 255);
+    background-color:#04AA6D;
+    padding: 9px 12px;
+    display: inline-block; 
+    border-radius: 15px;
+    margin-right: 10px;
+}
+
+.terima:hover {
+    background-color:  #007c4f; 
+    color: white;
+    box-shadow: 0px 1px 5px hsl(0, 20%, 5%);
+  }
+
+  .tolak{
+    transition-duration: 0.4s;
+    text-decoration: none;
+    font-size: 15px;
+    border: none;
+    color: rgb(255, 255, 255);
+    background-color: #e70101;
+    padding: 9px 12px;
+    display: inline-block;
+    border-radius: 15px;
+
+}
+
+.tolak:hover {
+    background-color: #aa0404; 
+    color: white;
+    box-shadow: 0px 1px 5px hsl(0, 20%, 5%);
+  }

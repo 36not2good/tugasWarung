@@ -139,7 +139,7 @@ export default class Minuman extends Component {
 
   handlePayOrder = () => {
     const { selectedDrinks } = this.state;
-
+  
     if (selectedDrinks.length === 0) {
       Swal.fire({
         position: 'center',
@@ -150,21 +150,45 @@ export default class Minuman extends Component {
       });
       return;
     }
+  
+    const orderData = {
+      selectedDrinks: selectedDrinks.map(drink => ({
+        nama_menu: drink.nama_menu,
+        jumlah_pesanan: drink.quantity,
+        harga_satuan: drink.harga,
+        catatan: drink.note,
+        foto_menu: drink.foto_menu, // Perlu disesuaikan dengan nama field yang digunakan di server
+      })),
+    };
+  
+    axios.post('http://localhost:5000/orders', orderData)
+      .then(response => {
+        Swal.fire({
+          title: 'Pesanan Sukses',
+          text: 'Terima Kasih Sudah Memesan',
+          imageUrl: '/image/success.png',
+          imageWidth: 400,
+          imageHeight: 200,
+          imageAlt: 'Custom image',
+        });
+  
+        this.setState({
+          selectedDrinks: [],
+          totalHarga: 0,
+        });
+      })
+      .catch(error => {
+        console.error(error);
+        Swal.fire({
+          position: 'center',
+          icon: 'error',
+          title: 'Terjadi kesalahan saat melakukan pesanan',
+          showConfirmButton: false,
+          timer: 1500,
+        });
+      });
+};
 
-    Swal.fire({
-      title: 'Pesanan Sukses',
-      text: 'Terima Kasih Sudah Memesan',
-      imageUrl: '/image/success.png',
-      imageWidth: 400,
-      imageHeight: 200,
-      imageAlt: 'Custom image',
-    });
-
-    this.setState({
-      selectedDrinks: [],
-      totalHarga: 0,
-    });
-  };
 
   render() {
     console.log(this.state.menus)

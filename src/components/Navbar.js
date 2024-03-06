@@ -29,6 +29,7 @@ class Navbar extends React.Component {
         <ul className="nav-links">
           <li className={`home ${currentPath === '/dashboard' ? 'active' : ''}`}><a href="/dashboard" >Home</a></li>
           <li className={`warung ${currentPath === '/notifikasi' ? 'active' : ''}`}><a href="/notifikasi">notifikasi</a></li>
+          <li className={`riwayat ${currentPath === '/riwayat' ? 'active' : ''}`}><a href="/riwayat">Histori</a></li>
         <li className="logout"><a href="/">Log out</a></li>
         </ul>
       </div>

@@ -12,7 +12,9 @@ import Dashboard from "./pages/admin/dashboard";
 import PageTambah from "./pages/tambah/TambahMenu";
 import PageEdit from "./pages/edit/EditMenu";
 import Notifikasi from "./pages/admin/notifikasi";
+import Riwayat from "./pages/admin/riwayat";
 import { AuthProvider } from './context/AuthContext';
+
 
 function App() {
   const [produks, setProduks] = React.useState([]);
@@ -35,6 +37,7 @@ function App() {
             <Route path="/add" element={<PageTambah />} />
             <Route path="/edit/:id" element={<PageEdit />} />
             <Route path="/notifikasi" element={<Notifikasi />} />
+            <Route path="/riwayat" element={<Riwayat />} />
           </Routes>
         </AuthProvider>
       </div>

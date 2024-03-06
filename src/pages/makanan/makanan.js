@@ -86,15 +86,15 @@ export default class Makanan extends Component {
 
   handleEditMenu = () => {
     const { selectedFoods, editingFood, editQuantity, editNote } = this.state;
-
+  
     const updatedFoods = selectedFoods.map((selectedFood) =>
       selectedFood.id === editingFood.id
         ? { ...selectedFood, quantity: editQuantity, note: editNote, totalPrice: editingFood.harga * editQuantity }
         : selectedFood
     );
-
+  
     const newTotalHarga = this.calculateTotal(updatedFoods);
-
+  
     Swal.fire({
       position: 'center',
       icon: 'success',
@@ -102,13 +102,14 @@ export default class Makanan extends Component {
       showConfirmButton: false,
       timer: 1500,
     });
-
+  
     this.setState({
       selectedFoods: updatedFoods,
       totalHarga: newTotalHarga,
       editingFood: null,
     });
   };
+  
 
   openEditPopup = () => {
     this.setState({
@@ -137,38 +138,8 @@ export default class Makanan extends Component {
     });
   };
 
-  // handlePayOrder = () => {
-  //   const { selectedFoods } = this.state;
-
-  //   if (selectedFoods.length === 0) {
-  //     Swal.fire({
-  //       position: 'center',
-  //       icon: 'error',
-  //       title: 'Silakan pilih salah satu menu terlebih dahulu',
-  //       showConfirmButton: false,
-  //       timer: 1500,
-  //     });
-  //     return;
-  //   }
-
-
-  //   Swal.fire({
-  //     title: 'Pesanan Sukses',
-  //     text: 'Terima Kasih Sudah Memesan',
-  //     imageUrl: '/image/success.png',
-  //     imageWidth: 400,
-  //     imageHeight: 200,
-  //     imageAlt: 'Custom image',
-  //   });
-
-  //   this.setState({
-  //     selectedFoods: [],
-  //     totalHarga: 0,
-  //   });
-  // };
-
   handlePayOrder = () => {
-    const { selectedFoods, editNote } = this.state;
+    const { selectedFoods } = this.state;
   
     if (selectedFoods.length === 0) {
       Swal.fire({
@@ -186,9 +157,9 @@ export default class Makanan extends Component {
         nama_menu: food.nama_menu,
         jumlah_pesanan: food.quantity,
         harga_satuan: food.harga,
-        catatan: editNote,
-        foto_menu: food.url
-      }))
+        catatan: food.note,
+        foto_menu: food.foto_menu, // Perlu disesuaikan dengan nama field yang digunakan di server
+      })),
     };
   
     axios.post('http://localhost:5000/orders', orderData)
@@ -217,7 +188,9 @@ export default class Makanan extends Component {
           timer: 1500,
         });
       });
-  };
+};
+
+  
   
 
   render() {
