@@ -96,6 +96,16 @@ body, h1, h2, h3, p, ul, li {
     border-radius: 8px;
   }
   
+  .pesanan{
+    font-family: 'Mukta', sans-serif;
+    transition: transform 0.3s ease;
+  }
+  .pesanan:hover{
+    background-color: #ff4545;
+    transform: scale(1.15);
+    border-radius: 8px;
+  }
+
   /* Styling untuk link di sebelah kanan */
   .nav-links {
     list-style: none;

@@ -13,6 +13,7 @@ import PageTambah from "./pages/tambah/TambahMenu";
 import PageEdit from "./pages/edit/EditMenu";
 import Notifikasi from "./pages/admin/notifikasi";
 import Riwayat from "./pages/admin/riwayat";
+import Pesanan from "./pages/pesanan/pesanan";
 import { AuthProvider } from './context/AuthContext';
 
 
@@ -38,6 +39,7 @@ function App() {
             <Route path="/edit/:id" element={<PageEdit />} />
             <Route path="/notifikasi" element={<Notifikasi />} />
             <Route path="/riwayat" element={<Riwayat />} />
+            <Route path="/pesanan" element={<Pesanan />} />
           </Routes>
         </AuthProvider>
       </div>

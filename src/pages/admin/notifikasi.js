@@ -9,7 +9,7 @@ export default class Notifikasi extends Component {
         super(props);
 
         this.state = {
-            orders: [], 
+            orders: [],
         };
     }
 
@@ -29,13 +29,27 @@ export default class Notifikasi extends Component {
     };
 
     handleAcceptOrder = (orderId) => {
-        // Implement logic for accepting an order
-        console.log('Order accepted:', orderId);
+        // Send a request to the server to update the order status
+        axios.patch(`http://localhost:5000/orders/${orderId}`, { keterangan: 1 })
+            .then(() => {
+                console.log('Order accepted:', orderId);
+                alert("pesanan diterima");
+                this.fetchOrders();
+            })
+            .catch(error => {
+                console.error('Error accepting order:', error);
+            });
     };
 
     handleRejectOrder = (orderId) => {
-        // Implement logic for rejecting an order
-        console.log('Order rejected:', orderId);
+        axios.patch(`http://localhost:5000/orders/${orderId}`, { keterangan: 2 })
+            .then(res => {
+                alert("Pesanan dibatalkan");
+                this.fetchPesans();
+            })
+            .catch(error => {
+                console.log(error);
+            });
     };
 
     render() {
@@ -46,7 +60,7 @@ export default class Notifikasi extends Component {
                 <Navbar />
                 <div className='notifikasi-container'>
                     <div className='konten-notifikasi'>
-                      <h2>Pesanan Masuk</h2>
+                        <h2>Pesanan Masuk</h2>
                         <div className='notifikasi-wrap'>
                             {orders.map((order) => (
                                 <div key={order.id} className='notification-card'>

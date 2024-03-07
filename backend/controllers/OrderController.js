@@ -37,6 +37,7 @@ export const saveOrder = async (req, res) => {
                     jumlah_pesanan: food.jumlah_pesanan,
                     harga_satuan: food.harga_satuan,
                     catatan: food.catatan,
+                    keterangan: food.note,
                     foto_menu: food.foto_menu
                 });
                 return order;
@@ -51,6 +52,7 @@ export const saveOrder = async (req, res) => {
                     jumlah_pesanan: drink.jumlah_pesanan,
                     harga_satuan: drink.harga_satuan,
                     catatan: drink.catatan,
+                    keterangan: drink.note,
                     foto_menu: drink.foto_menu
                 });
                 return order;
@@ -66,6 +68,11 @@ export const saveOrder = async (req, res) => {
 
 export const updateOrder = async (req, res) => {
     try {
+        const { id } = req.params;
+        const { keterangan } = req.body;
+
+        await Order.update({ keterangan }, { where: { id } });
+
         res.json({ msg: "Order Updated Successfully" });
     } catch (error) {
         console.log(error.message);
