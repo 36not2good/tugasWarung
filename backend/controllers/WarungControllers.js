@@ -30,7 +30,7 @@ export const saveWarung = async (req, res) => {
     
     if (req.files === null) return res.status(400).json({ msg: "No file uploaded" });
     const name = req.body.nama_warung;
-    const file = req.files.foto_warung;
+    const file = req.files.foto;
     const fileSize = file.size; 
     const ext = path.extname(file.name);
     const fileName = `${Date.now().toString(36)}_${Math.random().toString(36).substring(2, 8)}${ext}`;

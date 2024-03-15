@@ -1,34 +1,111 @@
-.pesanan1-kontainer{
+.pesanan1-kontainer {
     height: 100vh;
     width: 100vw;
     display: flex;
-}
-
-.pesan1-wrap{
+  }
+  
+  .pesan1-wrap {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     max-width: 100%;
   }
-
-.pesan1-card {
+  
+  .pesan1-card {
     border-radius: 5px;
     transition: transform 0.3s ease;
     margin: 10px;
     cursor: pointer;
     align-items: center;
-    width: 180px;
-    height: 130px;
+    width: 20vw;
+    height: 21vh;
     box-shadow: 1px 2px 2px 2px #bbbbbb;
-    flex-basis: calc(25% - 20px);
+    flex-basis: calc(30% - 25px);
     flex-shrink: 0;
-    max-width: calc(50% - 20px);
-}
+    max-width: fit-content
+  }
 
-.konten-pesanan1{
+  .pesanan-details{
+    margin: 10px;
+  }
+  
+  .konten-pesanan1 {
     margin-top: 20px;
-}
+  }
 
-.konten-pesanan1.h2{
-    margin-left: 10px;
-}
+  .kategori-pesanan {
+    margin: 10px;
+    width: fit-content;
+    border-radius: 5px;
+    padding: 5px;
+    background-color: #FD7401;
+  }
+
+  .kategori-pesanan:hover{
+    background-color: #FF6E40;
+    box-shadow: 0px 1px 5px hsl(0, 20%, 5%);
+  }
+  
+  .kategori-status {
+    font-family: 'Mukta', sans-serif;
+    transition: transform 0.3s ease;
+    position: relative;
+    cursor: pointer;
+  }
+  
+  .kategori-status::after {
+    font-family: FontAwesome;
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    transition: transform 0.3s ease;
+  }
+  
+  .kategori-konten {
+    position: absolute;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    min-width: 150px;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+    color: black;
+    padding: 10px 15px;
+    text-decoration: none;
+    display: block;
+  }
+  
+  .kategori {
+    margin-top: 5px;
+    border-radius: 4px;
+    background-color: whitesmoke;
+    transition: all 0.5s;
+    cursor: pointer;
+  }
+
+  .kategori:hover{
+    background-color: #bbbbbb; 
+    color: white;
+    box-shadow: 0px 1px 5px hsl(0, 20%, 5%);
+  }
+
+  .batal{
+    transition-duration: 0.4s;
+    text-decoration: none;
+    font-size: 15px;
+    border: none;
+    color: rgb(255, 255, 255);
+    background-color: red;
+    padding: 5px 10px;
+    width: 15vw;
+    display: inline-block;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+
+  .batal:hover{
+    background-color: #aa0404; 
+    color: white;
+    box-shadow: 0px 1px 5px hsl(0, 20%, 5%);
+  }
+  

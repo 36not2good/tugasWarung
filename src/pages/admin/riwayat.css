@@ -3,3 +3,9 @@
     width: 100vw;
     display: flex;
 }
+
+.history-riwayat{
+    width: 100vw;
+    margin-top: 10px;
+    margin-left: 20px;
+}

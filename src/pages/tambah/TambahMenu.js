@@ -12,6 +12,8 @@ const TambahMenu = () => {
     foto: ""
   });
 
+  
+
   const handleChange = (e) => {
     const { name, value, files } = e.target;
     setNewItem(prevState => ({
@@ -26,6 +28,11 @@ const TambahMenu = () => {
     e.preventDefault();
     console.log("Fungsi handleSave dipanggil");
     const { nama, harga, stok, id_kategori, foto } = newItem;
+
+    if (!nama || !harga || !stok || !id_kategori || !foto) {
+      alert("Harap isi semua kolom!");
+      return;
+    }
 
     try {
       const formData = new FormData();

@@ -1,48 +1,46 @@
 import React from 'react';
-import { NavLink, Routes, Route } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import NavbarComponent from "../../components/NavbarComponent";
 import FooterComponent from "../../components/FooterComponent";
 import "./detail.css"
+import axios from 'axios';
 
 class Detail extends React.Component {
     constructor(props) {
         super(props);
 
         this.state = {
-            warungs: [
-                {
-                    idWarung: 1,
-                    name: 'WARUNG 01',
-                    image: '/image/warung/warung 01.jpeg',
-                },
-                {
-                    idWarung: 2,
-                    name: 'WARUNG 02',
-                    image: '/image/warung/warung 02.jpeg',
-                },
-                {
-                    idWarung: 3,
-                    name: 'WARUNG 03',
-                    image: '/image/warung/warung 03.jpeg',
-                },
-                {
-                    idWarung: 3,
-                    name: 'WARUNG 03',
-                    image: '/image/warung/warung 03.jpeg',
-                },
-                // Tambahkan makanan lain sesuai kebutuhan
-            ],
-            selectedwarungs: [],
-            totalHarga: 0,
-            editingwarung: null,
-            editQuantity: 0,
-            editNote: '',
-        };
+            products: [],
+            filteredProducts: [],
+            selectedCategory: 1 // Kategori makanan sebagai kategori yang dipilih secara default
+        }
     }
 
+    componentDidMount() {
+        this.fetchProducts();
+    }
+
+    fetchProducts = () => {
+        axios.get('http://localhost:5000/products')
+            .then(res => {
+                this.setState({ products: res.data }, () => {
+                    // Memanggil filterProductsByCategory setelah data produk dimuat
+                    this.filterProductsByCategory(this.state.selectedCategory);
+                });
+            })
+            .catch(error => {
+                console.log(error);
+            });
+    };
+
+    filterProductsByCategory = (categoryId) => {
+        const { products } = this.state;
+        const filteredProducts = products.filter(product => product.id_kategori === categoryId);
+        this.setState({ filteredProducts, selectedCategory: categoryId });
+    }
 
     render() {
-        const { warungs } = this.state;
+        const { products, filteredProducts, selectedCategory } = this.state;
 
         return (
             <div>
@@ -56,24 +54,19 @@ class Detail extends React.Component {
                     </div>
                     <div className='detail-kategori'>
                         <ul className='kategori'>
-                            <li className='makanan'>Makanan</li>
-                            <li className='minuman'>Minuman</li>
+                            <li className={`makanan ${selectedCategory === 1 ? 'active' : ''}`} onClick={() => this.filterProductsByCategory(1)}>Makanan</li>
+                            <li className={`minuman ${selectedCategory === 2 ? 'active' : ''}`} onClick={() => this.filterProductsByCategory(2)}>Minuman</li>
                         </ul>
                     </div>
 
                     <div className='detail-menu'>
-                        {warungs.map((warung) => (
-                            <NavLink to={{
-                                pathname: `/warung/${warung.idWarung}`,
-                                state: { title: 'from home page' }
-                            }} key={warung.idWarung}
-                                className='menu-card'
-                            >
+                        {(selectedCategory ? filteredProducts : products).map((product) => (
+                            <NavLink to={`/products/${product.id}`} key={product.id} className='menu-card'>
                                 <div className='menu-image-container'>
-                                    <img src={warung.image} alt={warung.name} className='menu-image' />
+                                    <img src={product.url} alt={product.nama_menu} className='menu-image' />
                                 </div>
                                 <div className='menu-details'>
-                                    <h3 >{warung.name}</h3>
+                                    <h3>{product.nama_menu}</h3>
                                 </div>
                             </NavLink>
                         ))}
@@ -85,4 +78,4 @@ class Detail extends React.Component {
     }
 }
 
-export default Detail
+export default Detail;
