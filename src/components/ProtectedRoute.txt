@@ -17,44 +17,29 @@ import Pesanan from "./pages/pesanan/pesanan";
 import { AuthProvider } from './context/AuthContext';
 
 
-
 function App() {
   const [produks, setProduks] = React.useState([]);
 
-  const PrivateRoute = ({ component: Component, ...rest }) => {
-    const { currentUser } = useAuth();
-
   return (
-      <Route
-        {...rest}
-        render={props =>
-          currentUser ? (
-            <Component {...props} />
-          ) : (
-            <Navigate to="/" replace state={{ from: props.location }} />
-          )
-        }
-      />
-    );
-  };
+    <Router>
       <div className="App">
         {/* Letakkan AuthProvider di atas Routes */}
         <AuthProvider>
           <Routes>
             <Route path="/" element={<PageLogin />} />
             <Route path="/register" element={<PageRegister />} />
-            <PrivateRoute path="/beranda" component={Beranda} />
-            <PrivateRoute path="/makanan" component={PageMakanan} />
-            <PrivateRoute path="/minuman" component={PageMinuman} />
-            <PrivateRoute path="/warung" component={PageWarung} />
-            <PrivateRoute path="/keranjang" component={Keranjang} />
-            <PrivateRoute path="/warung/:id" component={DetailWarung} />
-            <PrivateRoute path="/dashboard" component={Dashboard} />
-            <PrivateRoute path="/add" component={PageTambah} />
-            <PrivateRoute path="/edit/:id" component={PageEdit} />
-            <PrivateRoute path="/notifikasi" component={Notifikasi} />
-            <PrivateRoute path="/riwayat" component={Riwayat} />
-            <PrivateRoute path="/pesanan" component={Pesanan} />
+            <Route path="/beranda" element={<Beranda />} />
+            <Route path="/makanan" element={<PageMakanan />} />
+            <Route path="/minuman" element={<PageMinuman />} />
+            <Route path="/warung" element={<PageWarung />} />
+            <Route path="/keranjang" element={<Keranjang />} />
+            <Route path="/warung/:id" element={<DetailWarung/>} />
+            <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/add" element={<PageTambah />} />
+            <Route path="/edit/:id" element={<PageEdit />} />
+            <Route path="/notifikasi" element={<Notifikasi />} />
+            <Route path="/riwayat" element={<Riwayat />} />
+            <Route path="/pesanan" element={<Pesanan />} />
           </Routes>
         </AuthProvider>
       </div>
