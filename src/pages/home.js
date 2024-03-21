@@ -1,25 +1,31 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch, faArrowUpRightFromSquare } from '@fortawesome/free-solid-svg-icons';
 import './home.css';
 import NavbarComponent from "../components/NavbarComponent";
-import FooterComponent from "../components/FooterComponent"
+import FooterComponent from "../components/FooterComponent";
+import { Link } from 'react-router-dom';
 
-class Beranda extends React.Component {
-  state = {
-    searchTerm: ''
-  };
+class Beranda extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      searchTerm: ""
+    };
+  }
 
-  handleSearch = (event) => {
+  handleInputChange = (event) => {
     this.setState({
       searchTerm: event.target.value
     });
   };
 
   render() {
+    const { searchTerm } = this.state;
+
     return (
       <div>
-        <NavbarComponent /> 
+        <NavbarComponent />
         <div className="beranda-container">
           <div className="background-image"></div>
           <div className="content">
@@ -28,7 +34,9 @@ class Beranda extends React.Component {
               <p>Mau makan apa hari ini?</p>
               <div className="search-box">
                 <FontAwesomeIcon icon={faSearch} className="search-icon" />
-                <input type="text" placeholder="Cari makanan..." value={this.state.searchTerm} onChange={this.handleSearch} />
+                <Link to='/search' className="search-link">
+                  <input type="text" placeholder="Cari makanan..." value={searchTerm} onChange={this.handleInputChange} />
+                </Link>
               </div>
             </div>
             <div className="most-searched">
@@ -54,4 +62,4 @@ class Beranda extends React.Component {
   }
 }
 
-export default Beranda
+export default Beranda;

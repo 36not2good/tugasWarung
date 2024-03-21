@@ -119,3 +119,26 @@ export const Login = async (req, res) => {
         res.status(500).json({ msg: "Internal Server Error" });
     }
 };
+
+export const Logout = async (req, res) => {
+    const refreshToken = req.cookies.refreshToken;
+    if (!refreshToken) return res.sendStatus(204);
+    try {
+        const user = await User.findOne({
+            where: {
+                refresh_token: refreshToken
+            }
+        });
+        if (!user) return res.sendStatus(204);
+        await User.update({ refresh_token: null }, {
+            where: {
+                id: user.id
+            }
+        });
+        res.clearCookie('refreshToken');
+        return res.sendStatus(200);
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({ msg: "Internal Server Error" });
+    }
+}

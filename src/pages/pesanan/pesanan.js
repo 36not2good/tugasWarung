@@ -51,46 +51,46 @@ export default class Pesanan extends Component {
     handleCategoryClick = (category) => {
         this.setState({
             selectedCategory: category,
-            isDropdownOpen: false   
+            isDropdownOpen: false
         });
     };
-    
+
     render() {
         const { pesans, isDropdownOpen, selectedCategory } = this.state;
         const filteredPesans = selectedCategory !== null ? pesans.filter(order => parseInt(order.keterangan) === parseInt(selectedCategory)) : pesans;
         const totalHargaSemuaPesanan = pesans.reduce((total, order) => {
             return total + (order.harga_satuan * order.jumlah_pesanan);
         }, 0);
-        
+
         return (
             <div className='pesanan1'>
                 <NavbarComponent />
                 <div className='pesanan1-kontainer'>
                     <div className='konten-pesanan1'>
                         <h2>Status Pesanan</h2>
-                <div className="kategori-pesanan">
-                <div
-                    className="kategori-status"
-                    onClick={this.toggleDropdown}
-                >
-                    Kategori Status{" "}
-                    <FontAwesomeIcon
-                    icon={faCaretDown}
-                    rotation={isDropdownOpen ? 180 : 0}
-                    />
-                </div>
-                {isDropdownOpen && ( 
-                    <div className="kategori-konten">
-                    <div className="kategori" onClick={() => this.handleCategoryClick(null)}>Semua Pesanan</div>
-                    <div className="kategori" onClick={() => this.handleCategoryClick(0)}> Sedang cek stok pesanan </div>
-                    <div className="kategori" onClick={() => this.handleCategoryClick(1)}> Pesanan sedang dibuat </div>
-                    <div className="kategori" onClick={() => this.handleCategoryClick(2)}> Pesanan dibatalkan </div>
-                    <div className="kategori" onClick={() => this.handleCategoryClick(3)}> Pesanan telah selesai </div>
-                    </div>
-                )}
-                </div>
+                        <div className="kategori-pesanan">
+                            <div
+                                className="kategori-status"
+                                onClick={this.toggleDropdown}
+                            >
+                                Kategori Status{" "}
+                                <FontAwesomeIcon
+                                    icon={faCaretDown}
+                                    rotation={isDropdownOpen ? 180 : 0}
+                                />
+                            </div>
+                            {isDropdownOpen && (
+                                <div className="kategori-konten">
+                                    <div className="kategori" onClick={() => this.handleCategoryClick(null)}>Semua Pesanan</div>
+                                    <div className="kategori" onClick={() => this.handleCategoryClick(0)}> Sedang cek stok pesanan </div>
+                                    <div className="kategori" onClick={() => this.handleCategoryClick(1)}> Pesanan sedang dibuat </div>
+                                    <div className="kategori" onClick={() => this.handleCategoryClick(2)}> Pesanan dibatalkan </div>
+                                    <div className="kategori" onClick={() => this.handleCategoryClick(3)}> Pesanan telah selesai </div>
+                                </div>
+                            )}
+                        </div>
                         <div className='pesan1-wrap'>
-                            {pesans.map((order) => (
+                            {filteredPesans.map((order) => (
                                 <div key={order.id} className='pesan1-card'>
                                     <div className='notification-details'>
                                         <h3>{order.nama_menu}</h3>
@@ -106,11 +106,14 @@ export default class Pesanan extends Component {
                                 </div>
                             ))}
                         </div>
+                        <div className='harga-pesan'>
+                            <p>total harga semua pesanan: {totalHargaSemuaPesanan}</p>
+                        </div>
                     </div>
                 </div>
                 <FooterComponent />
             </div>
         )
     }
-    
+
 } 

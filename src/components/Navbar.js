@@ -18,6 +18,23 @@ class Navbar extends React.Component {
     });
   }
 
+  async handleLogout(){
+    try {
+      const response = await fetch('/logout', {
+        method: 'DELETE',
+        credentials: 'include' 
+      });
+      localStorage.removeItem("user_kantin", JSON.stringify(response.data));
+      if (response.ok) {
+        window.location.href = '/'; 
+      } else {
+        console.error('Failed to logout');
+      }
+    } catch (error) {
+      console.error('Failed to logout', error);
+    }
+  }
+  
   render() {
     const currentPath = window.location.pathname;
 
@@ -30,7 +47,7 @@ class Navbar extends React.Component {
           <li className={`home ${currentPath === '/dashboard' ? 'active' : ''}`}><a href="/dashboard" >Home</a></li>
           <li className={`warung ${currentPath === '/notifikasi' ? 'active' : ''}`}><a href="/notifikasi">notifikasi</a></li>
           <li className={`riwayat ${currentPath === '/riwayat' ? 'active' : ''}`}><a href="/riwayat">Histori</a></li>
-        <li className="logout"><a href="/">Log out</a></li>
+        <li className="logout" onClick={this.handleLogout}><a href="/">Log out</a></li>
         </ul>
       </div>
     );

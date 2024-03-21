@@ -1,0 +1,103 @@
+.cari-container{
+    position: relative;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    cursor: default;
+  }
+
+.cari-box{
+    position: relative;
+    display: inline-block;
+    border-radius: 15px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    margin-top: 15px;
+}
+
+.cari-icon {
+    position: absolute;
+    top: 60%;
+    right: 15px;
+    transform: translateY(-50%);
+    color: black;
+    cursor: pointer;
+  }
+  
+  input {
+    padding: 10px 250px 10px 10px;
+    margin-top: 10px;
+    border-radius: 15px;
+    color: black;
+    border: none;
+  }
+
+  .product-wrap{
+    display: flex;
+    flex-wrap: wrap;
+    padding-inline: 10px;
+    overflow-x: auto;
+    flex-shrink: 0;
+    margin-top: 10px;
+}
+
+  .product-list{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    max-width: 100%;
+  }
+  
+  .product-card {
+    border-radius: 5px;
+    transition: transform 0.3s ease;
+    margin: 10px;
+    cursor: pointer;
+    align-items: center;
+    width: 100%;
+    height: 190px;
+    box-shadow: 1px 2px 2px 2px #d9d9d9;
+    flex-basis: calc(25% - 20px);
+    flex-shrink: 0;
+    max-width: calc(50% - 20px);
+  }
+  
+  
+  .product-card:hover {
+    transform: scale(1.05); /* Perbesar kartu saat dihover */
+  }
+
+  .product-img-container{
+    position: relative;
+    width: 100%;
+    height: 62%;
+    overflow: hidden;
+    border-radius: 5px;
+  }
+
+  .product-img{
+    width: 100%;
+    object-fit: cover;
+  }
+
+  .product-details {
+    width: 100%; 
+    padding-top: 10px;
+    margin-left: 5px;
+    display: flex;
+    flex-direction: row;
+  }
+  
+  .product-name{
+    display: flex;
+    flex-direction: column;
+    margin-right: 20px;
+  }
+  
+  .product-name h3{
+    font-size: 2.5vh;
+  }
+  
+  .product-details h4{
+    margin: auto;
+  }

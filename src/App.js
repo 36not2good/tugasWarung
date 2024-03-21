@@ -1,12 +1,13 @@
-import React from "react";
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import React, { useState, useEffect } from "react";
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import Swal from 'sweetalert2';
 import Beranda from "./pages/home";
 import PageMakanan from "./pages/makanan/makanan";
 import PageMinuman from "./pages/minuman/minuman";
 import PageWarung from "./pages/warung/warung";
 import Keranjang from "./pages/keranjang/keranjang";
 import DetailWarung from "./pages/warung/detail";
-import PageLogin from "./pages/login";
+import Login from "./pages/login";
 import PageRegister from "./pages/Register";
 import Dashboard from "./pages/admin/dashboard";
 import PageTambah from "./pages/tambah/TambahMenu";
@@ -14,52 +15,63 @@ import PageEdit from "./pages/edit/EditMenu";
 import Notifikasi from "./pages/admin/notifikasi";
 import Riwayat from "./pages/admin/riwayat";
 import Pesanan from "./pages/pesanan/pesanan";
-import { AuthProvider } from './context/AuthContext';
-
-
+import SearchPage from "./pages/search/search";
+import Error404 from "./pages/404"
 
 function App() {
-  const [produks, setProduks] = React.useState([]);
+  const [isLoggedIn, setIsLoggedIn] = useState(false); // State untuk menandai status login
 
-  const PrivateRoute = ({ component: Component, ...rest }) => {
-    const { currentUser } = useAuth();
+  useEffect(() => {
+    const user = JSON.parse(localStorage.getItem("user_kantin")); // Cek apakah ada user yang sudah login
+    if (user) {
+      setIsLoggedIn(true);
+    }
+  }, []);
+
+useEffect(() => {
+  if(!isLoggedIn){
+    Swal.fire({
+      position: 'center',
+      icon: 'error',
+      title: 'Silakan login terlebih dahulu',
+      showConfirmButton: false,
+      timer: 1500,
+    });
+  }
+}, [isLoggedIn])
 
   return (
-      <Route
-        {...rest}
-        render={props =>
-          currentUser ? (
-            <Component {...props} />
-          ) : (
-            <Navigate to="/" replace state={{ from: props.location }} />
-          )
-        }
-      />
-    );
-  };
+    <Router>
       <div className="App">
-        {/* Letakkan AuthProvider di atas Routes */}
-        <AuthProvider>
-          <Routes>
-            <Route path="/" element={<PageLogin />} />
-            <Route path="/register" element={<PageRegister />} />
-            <PrivateRoute path="/beranda" component={Beranda} />
-            <PrivateRoute path="/makanan" component={PageMakanan} />
-            <PrivateRoute path="/minuman" component={PageMinuman} />
-            <PrivateRoute path="/warung" component={PageWarung} />
-            <PrivateRoute path="/keranjang" component={Keranjang} />
-            <PrivateRoute path="/warung/:id" component={DetailWarung} />
-            <PrivateRoute path="/dashboard" component={Dashboard} />
-            <PrivateRoute path="/add" component={PageTambah} />
-            <PrivateRoute path="/edit/:id" component={PageEdit} />
-            <PrivateRoute path="/notifikasi" component={Notifikasi} />
-            <PrivateRoute path="/riwayat" component={Riwayat} />
-            <PrivateRoute path="/pesanan" component={Pesanan} />
-          </Routes>
-        </AuthProvider>
+        <Routes>
+          <Route path="/" element={isLoggedIn ? <Beranda /> : <Login />} />
+          <Route path="/register" element={<PageRegister />} />
+          {isLoggedIn ? (
+            <>
+              <Route path="/beranda" element={<Beranda />} />
+              <Route path="/makanan" element={<PageMakanan />} />
+              <Route path="/minuman" element={<PageMinuman />} />
+              <Route path="/warung" element={<PageWarung />} />
+              <Route path="/keranjang" element={<Keranjang />} />
+              <Route path="/warung/:id" element={<DetailWarung />} />
+              <Route path="/dashboard" element={<Dashboard />} />
+              <Route path="/add" element={<PageTambah />} />
+              <Route path="/edit/:id" element={<PageEdit />} />
+              <Route path="/notifikasi" element={<Notifikasi />} />
+              <Route path="/riwayat" element={<Riwayat />} />
+              <Route path="/pesanan" element={<Pesanan />} />
+            <Route path="/search" element={<SearchPage/>} />
+            <Route path="*" element={<Error404/>} />
+            </>
+          ):(
+            <Route path="/*" element={<Navigate to="/" />} />
+            
+          )}
+        </Routes>
       </div>
     </Router>
   );
 }
+
 
 export default App;

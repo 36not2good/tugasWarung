@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { useAuth } from '../context/AuthContext';
+import { Link } from 'react-router-dom';
 import './Login.css';
 import foto from './login.png';
 import axios from 'axios';
@@ -10,7 +9,6 @@ const Login = () => {
   const [password, setPassword] = useState('');
   const [msg, setMsg] = useState('');
   const [errorMessages, setErrorMessages] = useState({});
-  const navigate = useNavigate();
 
   const validateInputs = () => {
     const errors = {};
@@ -34,11 +32,12 @@ const Login = () => {
               username: username,
               password: password
           });
+          localStorage.setItem("user_kantin", JSON.stringify(response.data));
           if(response.data.data?.id_role == 1){
-            navigate("/beranda");
+            window.location.href = "/beranda";
           }
           if(response.data.data?.id_role == 2){
-            navigate("/dashboard");
+            window.location.href = "/dashboard";
           }
              
       } catch (error) {
@@ -49,7 +48,7 @@ const Login = () => {
   }
 
   const handleRegisterClick = () => {
-    navigate('/register');
+    window.location.href = "/register";
   };
 
   return (

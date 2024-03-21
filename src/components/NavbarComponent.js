@@ -20,6 +20,23 @@ class NavbarComponent extends React.Component {
     });
   }
 
+  async handleLogout(){
+    try {
+      const response = await fetch('/logout', {
+        method: 'DELETE',
+        credentials: 'include' 
+      });
+      localStorage.removeItem("user_kantin", JSON.stringify(response.data));
+      if (response.ok) {
+        window.location.href = '/'; 
+      } else {
+        console.error('Failed to logout');
+      }
+    } catch (error) {
+      console.error('Failed to logout', error);
+    }
+  }
+
   render() {
     const currentPath = window.location.pathname;
 
@@ -40,7 +57,7 @@ class NavbarComponent extends React.Component {
               <div className={`text-2 ${currentPath === '/minuman' ? 'active' : ''}`}><a href="/minuman">Minuman</a></div>
             </ul>
           </li>
-          <li className={`logout ${currentPath === '/' ? 'active' : ''}`}><a href="/">Log out</a></li>
+          <li className={`logout ${currentPath === '/' ? 'active' : ''}`}><a href="/" onClick={this.handleLogout}>Log out</a></li>
           <li className={`cart ${currentPath === '/keranjang' ? 'active' : ''}`}><a href="/keranjang"><FontAwesomeIcon icon={faCartShopping} /></a></li>
         </ul>
       </div>
