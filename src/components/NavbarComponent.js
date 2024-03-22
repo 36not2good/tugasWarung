@@ -2,6 +2,7 @@ import React from 'react';
 import "./navbar.css";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCaretDown, faCartShopping } from '@fortawesome/free-solid-svg-icons';
+import { Link } from 'react-router-dom';
 
 class NavbarComponent extends React.Component {
   constructor(props) {
@@ -20,15 +21,15 @@ class NavbarComponent extends React.Component {
     });
   }
 
-  async handleLogout(){
+  async handleLogout() {
     try {
       const response = await fetch('/logout', {
         method: 'DELETE',
-        credentials: 'include' 
+        credentials: 'include'
       });
       localStorage.removeItem("user_kantin", JSON.stringify(response.data));
       if (response.ok) {
-        window.location.href = '/'; 
+        window.location.href = '/';
       } else {
         console.error('Failed to logout');
       }
@@ -40,25 +41,26 @@ class NavbarComponent extends React.Component {
   render() {
     const currentPath = window.location.pathname;
 
+
     return (
       <div className="navbar">
         <div className="logo">Canteen</div>
         <ul className="nav-links">
-          <li className={`home ${currentPath === '/beranda' ? 'active' : ''}`}><a href="/beranda">Home</a></li>
-          <li className={`warung ${currentPath === '/warung' ? 'active' : ''}`}><a href="/warung">Warung</a></li>
-          <li className={`pesanan ${currentPath.includes('/pesanan') ? 'active' : ''}`} style={{ cursor: 'pointer' }}><a href="/pesanan">Pesanan</a></li>
-          <li className={`kategori-menu ${currentPath.includes('/kategori') ? 'active' : ''}`} style={{ cursor: 'pointer' }}>
+          <li className={`home ${currentPath === '/beranda' ? 'active' : ''}`}><Link to="/beranda">Home</Link></li>
+          <li className={`warung ${currentPath === '/warung' ? 'active' : ''}`}><Link to="/warung">Warung</Link></li>
+          <li className={`pesanan ${currentPath.includes('/pesanan') ? 'active' : ''}`}><Link to="/pesanan">Pesanan</Link></li>
+          <li className="kategori-menu" style={{ cursor: 'pointer' }}>
             <div className="dropdown-toggle" onClick={this.toggleMenu}>
               Kategori Menu <FontAwesomeIcon icon={faCaretDown} />
             </div>
             <ul className="dropdown-content" style={{ display: this.state.isOpen ? 'block' : 'none' }}>
-              <div className={`text-1 ${currentPath === '/makanan' ? 'active' : ''}`}><a href="/makanan">Makanan</a></div>
+              <li className={`text-1 ${currentPath === '/makanan' ? 'active' : ''}`}><Link to="/makanan">Makanan</Link></li>
               <hr />
-              <div className={`text-2 ${currentPath === '/minuman' ? 'active' : ''}`}><a href="/minuman">Minuman</a></div>
+              <li className={`text-2 ${currentPath === '/minuman' ? 'active' : ''}`}><Link to="/minuman">Minuman</Link></li>
             </ul>
           </li>
           <li className={`logout ${currentPath === '/' ? 'active' : ''}`}><a href="/" onClick={this.handleLogout}>Log out</a></li>
-          <li className={`cart ${currentPath === '/keranjang' ? 'active' : ''}`}><a href="/keranjang"><FontAwesomeIcon icon={faCartShopping} /></a></li>
+          <li className={`cart ${currentPath === '/keranjang' ? 'active' : ''}`}><Link to="/keranjang"><FontAwesomeIcon icon={faCartShopping} /></Link></li>
         </ul>
       </div>
     );

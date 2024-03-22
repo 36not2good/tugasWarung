@@ -28,23 +28,23 @@ function App() {
     }
   }, []);
 
-useEffect(() => {
-  if(!isLoggedIn){
-    Swal.fire({
-      position: 'center',
-      icon: 'error',
-      title: 'Silakan login terlebih dahulu',
-      showConfirmButton: false,
-      timer: 1500,
-    });
-  }
-}, [isLoggedIn])
+  useEffect(() => {
+    if (!isLoggedIn) {
+      Swal.fire({
+        position: 'center',
+        icon: 'error',
+        title: 'Silakan login terlebih dahulu',
+        showConfirmButton: false,
+        timer: 1500,
+      });
+    }
+  }, [isLoggedIn])
 
   return (
     <Router>
       <div className="App">
         <Routes>
-          <Route path="/" element={isLoggedIn ? <Beranda /> : <Login />} />
+        <Route path="/" element={isLoggedIn ? <Navigate to="/beranda" /> : <Login />} />
           <Route path="/register" element={<PageRegister />} />
           {isLoggedIn ? (
             <>
@@ -60,12 +60,12 @@ useEffect(() => {
               <Route path="/notifikasi" element={<Notifikasi />} />
               <Route path="/riwayat" element={<Riwayat />} />
               <Route path="/pesanan" element={<Pesanan />} />
-            <Route path="/search" element={<SearchPage/>} />
-            <Route path="*" element={<Error404/>} />
+              <Route path="/search" element={<SearchPage />} />
+              <Route path="*" element={<Error404 />} />
             </>
-          ):(
+          ) : (
             <Route path="/*" element={<Navigate to="/" />} />
-            
+
           )}
         </Routes>
       </div>
