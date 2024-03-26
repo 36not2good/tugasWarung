@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import "./navbar.css";
 
 class Navbar extends React.Component {
@@ -18,15 +19,15 @@ class Navbar extends React.Component {
     });
   }
 
-  async handleLogout(){
+  async handleLogout() {
     try {
       const response = await fetch('/logout', {
         method: 'DELETE',
-        credentials: 'include' 
+        credentials: 'include'
       });
       localStorage.removeItem("user_kantin", JSON.stringify(response.data));
       if (response.ok) {
-        window.location.href = '/'; 
+        window.location.href = '/';
       } else {
         console.error('Failed to logout');
       }
@@ -34,20 +35,20 @@ class Navbar extends React.Component {
       console.error('Failed to logout', error);
     }
   }
-  
+
   render() {
     const currentPath = window.location.pathname;
 
     return (
       <div className="navbar">
         <div className="logo-container">
-        <div className="logo">Canteen</div>
-        <h3>owner</h3></div>
+          <div className="logo">Canteen</div>
+          <h3>owner</h3></div>
         <ul className="nav-links">
-          <li className={`home ${currentPath === '/dashboard' ? 'active' : ''}`}><a href="/dashboard" >Home</a></li>
-          <li className={`warung ${currentPath === '/notifikasi' ? 'active' : ''}`}><a href="/notifikasi">notifikasi</a></li>
-          <li className={`riwayat ${currentPath === '/riwayat' ? 'active' : ''}`}><a href="/riwayat">Histori</a></li>
-        <li className="logout" onClick={this.handleLogout}><a href="/">Log out</a></li>
+          <li className={`home ${currentPath === '/dashboard' ? 'active' : ''}`}><Link to="/dashboard">Home</Link></li>
+          <li className={`warung ${currentPath === '/notifikasi' ? 'active' : ''}`}><Link to="/notifikasi">notifikasi</Link></li>
+          <li className={`riwayat ${currentPath === '/riwayat' ? 'active' : ''}`}><Link to="/riwayat">Histori</Link></li>
+          <li className="logout" onClick={this.handleLogout}><Link to="/">Log out</Link></li>
         </ul>
       </div>
     );

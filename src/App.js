@@ -25,26 +25,21 @@ function App() {
     const user = JSON.parse(localStorage.getItem("user_kantin")); // Cek apakah ada user yang sudah login
     if (user) {
       setIsLoggedIn(true);
+      if(user.id_role === 2){
+        return <Navigate to="/dashboard" />
+      }
+    }else{
+      setIsLoggedIn(false);
     }
   }, []);
 
-  useEffect(() => {
-    if (!isLoggedIn) {
-      Swal.fire({
-        position: 'center',
-        icon: 'error',
-        title: 'Silakan login terlebih dahulu',
-        showConfirmButton: false,
-        timer: 1500,
-      });
-    }
-  }, [isLoggedIn])
 
   return (
     <Router>
       <div className="App">
         <Routes>
         <Route path="/" element={isLoggedIn ? <Navigate to="/beranda" /> : <Login />} />
+        <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/register" element={<PageRegister />} />
           {isLoggedIn ? (
             <>
@@ -54,7 +49,6 @@ function App() {
               <Route path="/warung" element={<PageWarung />} />
               <Route path="/keranjang" element={<Keranjang />} />
               <Route path="/warung/:id" element={<DetailWarung />} />
-              <Route path="/dashboard" element={<Dashboard />} />
               <Route path="/add" element={<PageTambah />} />
               <Route path="/edit/:id" element={<PageEdit />} />
               <Route path="/notifikasi" element={<Notifikasi />} />
@@ -72,6 +66,18 @@ function App() {
     </Router>
   );
 }
+
+const user = JSON.parse(localStorage.getItem("user_kantin"));
+if (!user) {
+  Swal.fire({
+    position: 'center',
+    icon: 'error',
+    title: 'Silakan login terlebih dahulu',
+    showConfirmButton: false,
+    timer: 1500,
+  });
+}
+
 
 
 export default App;

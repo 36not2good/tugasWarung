@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Navigate } from 'react-router-dom';
 import './Login.css';
 import foto from './login.png';
 import axios from 'axios';
 
-const Login = () => {
+const Login = (setIsLoggedIn) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [msg, setMsg] = useState('');
@@ -33,10 +33,9 @@ const Login = () => {
               password: password
           });
           localStorage.setItem("user_kantin", JSON.stringify(response.data));
-          if(response.data.data?.id_role == 1){
+          if(response.data.data?.id_role === 1){
             window.location.href = "/beranda";
-          }
-          if(response.data.data?.id_role == 2){
+          }else if(response.data.data?.id_role === 2){
             window.location.href = "/dashboard";
           }
              
