@@ -11,8 +11,8 @@ export default class Dashboard extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      data: [],
-      filteredData: [], // Sudah tidak diperlukan karena semua data akan ditampilkan pertama kali
+      data: { result: [] }, // Inisialisasi data sebagai objek dengan properti result
+      filteredData: [],
       selectedCategory: "all",
       highlightedCategory: null,
     };
@@ -26,7 +26,8 @@ export default class Dashboard extends Component {
     try {
       const response = await fetch("http://localhost:5000/products");
       const data = await response.json();
-      this.setState({ data, filteredData: data }); // Mengatur filteredData untuk menampilkan semua data
+      this.setState({ data }); // Mengatur state data dengan data dari server
+      this.filterDataByCategory(); // Memanggil filterDataByCategory setelah data diperbarui
     } catch (error) {
       console.error("Error fetching data:", error);
     }
@@ -42,11 +43,12 @@ export default class Dashboard extends Component {
   filterDataByCategory() {
     const { data, selectedCategory } = this.state;
     console.log("Selected Category:", selectedCategory);
+    const products = data.result; // Mengambil array produk dari data
     if (selectedCategory === "all") {
       // Jangan perlu filter jika kategori yang dipilih adalah "all"
-      this.setState({ filteredData: data });
+      this.setState({ filteredData: products });
     } else {
-      const filteredData = data.filter(
+      const filteredData = products.filter(
         (item) => item.id_kategori === parseInt(selectedCategory)
       );
       console.log("Filtered Data:", filteredData);
@@ -69,7 +71,7 @@ export default class Dashboard extends Component {
               </div>
             </div>
             <div className="display-tabel">
-            <TabelData data={filteredData} fetchData={this.fetchData.bind(this)} /> 
+              <TabelData data={filteredData} fetchData={this.fetchData.bind(this)} /> 
               <div className="kategori-tabel">
                 <table className="tabel-kategorii">
                   <thead>
@@ -78,22 +80,22 @@ export default class Dashboard extends Component {
                     </tr>
                   </thead>
                   <tbody>
-  <tr className={this.state.highlightedCategory === "all" ? "highlighted" : ""}>
-    <td onClick={() => this.handleCategoryClick("all")}>
-      <div>Semua</div>
-    </td>
-  </tr>
-  <tr className={this.state.highlightedCategory === 1 ? "highlighted" : ""}>
-    <td onClick={() => this.handleCategoryClick(1)}>
-      <div>Makanan</div>
-    </td>
-  </tr>
-  <tr className={this.state.highlightedCategory === 2 ? "highlighted" : ""}>
-    <td onClick={() => this.handleCategoryClick(2)}>
-      <div>Minuman</div>
-    </td>
-  </tr>
-</tbody>
+                    <tr className={this.state.highlightedCategory === "all" ? "highlighted" : ""}>
+                      <td onClick={() => this.handleCategoryClick("all")}>
+                        <div>Semua</div>
+                      </td>
+                    </tr>
+                    <tr className={this.state.highlightedCategory === 1 ? "highlighted" : ""}>
+                      <td onClick={() => this.handleCategoryClick(1)}>
+                        <div>Makanan</div>
+                      </td>
+                    </tr>
+                    <tr className={this.state.highlightedCategory === 2 ? "highlighted" : ""}>
+                      <td onClick={() => this.handleCategoryClick(2)}>
+                        <div>Minuman</div>
+                      </td>
+                    </tr>
+                  </tbody>
                 </table>
               </div>
             </div>
@@ -103,4 +105,4 @@ export default class Dashboard extends Component {
       </div>
     );
   }
-}  
+}

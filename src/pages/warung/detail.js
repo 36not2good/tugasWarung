@@ -23,7 +23,7 @@ class Detail extends React.Component {
     fetchProducts = () => {
         axios.get('http://localhost:5000/products')
             .then(res => {
-                this.setState({ products: res.data }, () => {
+                this.setState({ products: res.data.result }, () => {
                     // Memanggil filterProductsByCategory setelah data produk dimuat
                     this.filterProductsByCategory(this.state.selectedCategory);
                 });

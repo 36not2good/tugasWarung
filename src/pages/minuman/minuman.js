@@ -29,7 +29,7 @@ export default class Minuman extends Component {
   fetchMenuData = () => {
     axios.get(API_URL + "products", { params: { id_kategori: 2 } })  
       .then(res => {
-        this.setState({ menus: res.data });
+        this.setState({ menus: res.data.result });
       })
       .catch(error => {
         console.log(error);
@@ -66,7 +66,7 @@ export default class Minuman extends Component {
         icon: 'success',
         title: 'Menu Ditambah',
         showConfirmButton: false,
-        timer: 1500,
+        timer: 10000,
       });
     }
   };
@@ -100,7 +100,7 @@ export default class Minuman extends Component {
       icon: 'success',
       title: 'Menu berhasil di edit',
       showConfirmButton: false,
-      timer: 1500,
+      timer: 10000,
     });
 
     this.setState({
@@ -130,6 +130,14 @@ export default class Minuman extends Component {
 
     const newTotalHarga = this.calculateTotal(updatedDrinks);
 
+    Swal.fire({
+      position: 'center',
+      icon: 'success',
+      title: 'berhasil hapus menu',
+      showConfirmButton: false,
+      timer: 10000,
+    });
+
     this.setState({
       selectedDrinks: updatedDrinks,
       totalHarga: newTotalHarga,
@@ -146,7 +154,7 @@ export default class Minuman extends Component {
         icon: 'error',
         title: 'Silakan pilih salah satu menu terlebih dahulu',
         showConfirmButton: false,
-        timer: 1500,
+        timer: 10000,
       });
       return;
     }
@@ -184,7 +192,7 @@ export default class Minuman extends Component {
           icon: 'error',
           title: 'Terjadi kesalahan saat melakukan pesanan',
           showConfirmButton: false,
-          timer: 1500,
+          timer: 10000,
         });
       });
 };
@@ -242,7 +250,7 @@ export default class Minuman extends Component {
               <p>Total Harga: {this.state.totalHarga}</p>
             </div>
             <button className='pay-button' onClick={this.handlePayOrder}>
-              BAYAR
+              PESAN
             </button>
           </div>
 

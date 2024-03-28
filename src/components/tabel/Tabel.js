@@ -120,6 +120,7 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import "./Tabel.css";
 import { BsFillTrashFill, BsFillPencilFill } from "react-icons/bs";
+import Swal from 'sweetalert2';
 
 class Tabel extends Component {
   constructor(props) {
@@ -152,6 +153,13 @@ class Tabel extends Component {
       method: "DELETE",
     })
       .then(() => {
+        Swal.fire({
+          position: 'center',
+          icon: 'success',
+          title: 'berhasil hapus data',
+          showConfirmButton: false,
+          timer: 1500,
+        });
         this.fetchData(); 
       })
       .catch((error) => console.error("Error deleting product:", error));

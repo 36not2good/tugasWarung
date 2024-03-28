@@ -40,7 +40,7 @@ class Warung extends Component {
       <div className='warung-container'>
         <NavbarComponent />
         <div className='content-warung'>
-          <h2>Daftar Warung</h2>
+          <h2>Daftar Kedai</h2>
           <div className='warung-list'>
             {warungs.map((warung) => (
               <NavLink

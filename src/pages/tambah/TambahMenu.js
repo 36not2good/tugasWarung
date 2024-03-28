@@ -67,7 +67,7 @@ const TambahMenu = () => {
   return (
     <div className="tambah-container">
       <Navbar />
-      <h1>WARUNG SARI RASA</h1>
+      <h1>Kedai Selena</h1>
       <div className="tambah-menu-wrapper">
         <div className="form-container">
           <div className="form-tambah">

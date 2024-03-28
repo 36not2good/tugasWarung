@@ -47,7 +47,7 @@ class Navbar extends React.Component {
         <ul className="nav-links">
           <li className={`home ${currentPath === '/dashboard' ? 'active' : ''}`}><Link to="/dashboard">Home</Link></li>
           <li className={`warung ${currentPath === '/notifikasi' ? 'active' : ''}`}><Link to="/notifikasi">notifikasi</Link></li>
-          <li className={`riwayat ${currentPath === '/riwayat' ? 'active' : ''}`}><Link to="/riwayat">Histori</Link></li>
+          {/* <li className={`riwayat ${currentPath === '/riwayat' ? 'active' : ''}`}><Link to="/riwayat">Histori</Link></li> */}
           <li className="logout" onClick={this.handleLogout}><Link to="/">Log out</Link></li>
         </ul>
       </div>

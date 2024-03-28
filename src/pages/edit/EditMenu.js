@@ -66,7 +66,7 @@ function EditMenu() {
   return (
     <div className="Edit-container">
       <Navbar />
-      <h1>WARUNG SARI RASA</h1>
+      <h1>Kedai Selena</h1>
       <div className="Edit-menu-wrapper">
         <div className="form-container-edit">
           <div className="form-Edit">

@@ -14,11 +14,20 @@ export const getProducts = async (req, res) => {
   // res.json({
   //   result: result,
   // });
+  // try {
+  //   const response = await Product.findAll();
+  //   res.json(response);
+  // } catch (error) {
+  //   console.log(error.message);
+  // }
   try {
-    const response = await Product.findAll();
-    res.json(response);
+    const { search } = req.query;
+    let condition = search ? { nama_menu: { [Op.like]: `%${search}%` } } : null;
+    const response = await Product.findAll({ where: condition });
+    res.json({ result: response });
   } catch (error) {
     console.log(error.message);
+    res.status(500).json({ msg: "Internal Server Error" });
   }
 };
 

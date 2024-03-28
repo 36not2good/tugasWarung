@@ -29,7 +29,7 @@ export default class Makanan extends Component {
   fetchMenuData = () => {
     axios.get(API_URL + "products", { params: { id_kategori: 1 } })  
       .then(res => {
-        this.setState({ menus: res.data });
+        this.setState({ menus: res.data.result });
       })
       .catch(error => {
         console.log(error);
@@ -130,7 +130,14 @@ export default class Makanan extends Component {
     const updatedFoods = selectedFoods.filter((selectedFood) => selectedFood.id !== editingFood.id);
 
     const newTotalHarga = this.calculateTotal(updatedFoods);
-
+    
+    Swal.fire({
+      position: 'center',
+      icon: 'success',
+      title: 'berhasil hapus menu',
+      showConfirmButton: false,
+      timer: 10000,
+    });
     this.setState({
       selectedFoods: updatedFoods,
       totalHarga: newTotalHarga,
@@ -245,7 +252,7 @@ export default class Makanan extends Component {
               <p>Total Harga: {this.state.totalHarga}</p>
             </div>
             <button className='pay-button' onClick={this.handlePayOrder}>
-              BAYAR
+              PESAN
             </button>
           </div>
 

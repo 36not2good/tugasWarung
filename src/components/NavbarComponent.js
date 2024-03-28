@@ -47,7 +47,7 @@ class NavbarComponent extends React.Component {
         <div className="logo">Canteen</div>
         <ul className="nav-links">
           <li className={`home ${currentPath === '/beranda' ? 'active' : ''}`}><Link to="/beranda">Home</Link></li>
-          <li className={`warung ${currentPath === '/warung' ? 'active' : ''}`}><Link to="/warung">Warung</Link></li>
+          <li className={`warung ${currentPath === '/warung' ? 'active' : ''}`}><Link to="/warung">Kedai</Link></li>
           <li className={`pesanan ${currentPath.includes('/pesanan') ? 'active' : ''}`}><Link to="/pesanan">Pesanan</Link></li>
           <li className="kategori-menu" style={{ cursor: 'pointer' }}>
             <div className="dropdown-toggle" onClick={this.toggleMenu}>
